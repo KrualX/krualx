@@ -1,0 +1,4130 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>KrualX-Phan Gia Bảo</title>
+<link
+rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+crossorigin="anonymous"
+referrerpolicy="no-referrer"
+/>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link
+href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300..800&family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap"
+rel="stylesheet"
+/>
+<style>
+:root {
+--bg-dark: #0f1117;
+--primary: #00e0ff;
+--highlight: #ffc107;
+--card-bg: #1a1d29;
+--text-light: #fff;
+--text-muted: #aaa;
+--lang-bg: #222b39;
+--lang-hover: #00e0ff;
+--btn-login-bg: #00e0ff;
+--btn-login-hover: #ffc107;
+--link-color: var(--primary); /* Màu cho liên kết chuyển đổi form */
+--link-hover-color: var(--highlight);
+--purple-dark: #2a224a; /* New color from image */
+--dark-blue: #1c1f2b; /* A darker blue for content sections */
+--gradient-bg: linear-gradient(
+135deg,
+#0f1117 0%,
+#1c1f2b 100%
+); /* Gradient nền */
+--gradient-btn: linear-gradient(
+45deg,
+var(--primary),
+#00aaff
+); /* Gradient nút */
+--gradient-btn-hover: linear-gradient(
+45deg,
+var(--highlight),
+#ffaa00
+); /* Gradient nút hover */
+}
+* {
+box-sizing: border-box;
+}
+body {
+margin: 0;
+/* Thay đổi font cho body */
+font-family: "Open Sans", sans-serif;
+background-color: var(--bg-dark);
+color: var(--text-light);
+display: flex; /* Dùng flex cho body để footer dính dưới cùng */
+flex-direction: column; /* Xếp các phần tử theo cột */
+min-height: 100vh; /* Chiều cao tối thiểu 100% viewport */
+}
+/* Font cho tiêu đề */
+h1,
+h2,
+h3 {
+font-family: "Poppins", sans-serif;
+font-weight: 700; /* Có thể điều chỉnh tùy ý */
+}
+header {
+background: var(--gradient-bg); /* Áp dụng gradient cho header */
+display: flex;
+justify-content: space-between;
+align-items: center;
+padding: 20px 40px;
+border-bottom: 1px solid rgba(255, 255, 255, 0.1); /* Border mềm hơn */
+position: sticky;
+top: 0;
+z-index: 999;
+transition: all 0.3s ease-in-out;
+}
+
+header.scrolled {
+/* Style mặc định cho PC, sẽ được ghi đè trong media query */
+background-color: rgba(15, 17, 23, 0.95); /* Màu nền đậm hơn, có độ trong suốt */
+box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4); /* Bóng đổ rõ hơn */
+}
+
+header h1 {
+color: var(--primary);
+margin: 0;
+cursor: default;
+transition: transform 0.3s ease, color 0.3s ease, text-shadow 0.3s ease;
+position: relative;
+z-index: 2;
+font-size: 32px; /* Tăng kích thước font */
+}
+header h1:hover {
+transform: scale(1.05); /* Giảm nhẹ hiệu ứng scale */
+color: var(--highlight);
+text-shadow: 0 0 12px var(--highlight); /* Bóng đổ rõ hơn */
+}
+nav {
+display: flex;
+align-items: center;
+gap: 15px;
+transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+}
+
+header.scrolled nav {
+/* Style mặc định cho PC, sẽ được ghi đè trong media query */
+}
+
+/* Áp dụng style cho tất cả các nav a */
+nav a {
+color: var(--primary);
+text-decoration: none;
+font-weight: 500;
+transition: all 0.3s ease-in-out, transform 0.2s ease-in-out;
+position: relative;
+cursor: pointer;
+display: flex;
+align-items: center;
+gap: 5px;
+padding: 8px 12px;
+border: 1px solid var(--primary);
+border-radius: 20px;
+/* Nền gradient nhẹ khi không hover */
+background: linear-gradient(
+45deg,
+rgba(0, 224, 255, 0.05),
+rgba(0, 224, 255, 0.15)
+);
+}
+nav a i {
+font-size: 16px;
+}
+/* Áp dụng style hover mới cho tất cả các nav a */
+nav a:hover {
+color: var(--highlight);
+border-color: var(--highlight);
+transform: translateY(-2px) scale(1.02);
+box-shadow: 0 0 12px rgba(0, 224, 255, 0.7); /* Thêm box-shadow mạnh hơn */
+text-shadow: none;
+background: linear-gradient(
+45deg,
+rgba(255, 193, 7, 0.1),
+rgba(255, 193, 7, 0.3)
+); /* Nền gradient khi hover */
+}
+/* Style cho link nav đang active */
+nav a.active-nav-link {
+color: var(--highlight);
+border-color: var(--highlight);
+box-shadow: 0 0 15px var(--highlight);
+background: var(--gradient-btn); /* Nền nổi bật hơn cho active */
+color: var(--bg-dark); /* Chữ tối khi active */
+font-weight: 600;
+}
+nav a.active-nav-link i {
+color: var(--bg-dark); /* Icon cũng màu tối khi active */
+}
+
+.search-box input {
+padding: 8px 15px; /* Tăng padding */
+border-radius: 25px; /* Bo tròn hơn */
+border: 1px solid #333; /* Thêm border nhẹ */
+outline: none;
+font-size: 14px;
+background: #222b39;
+color: var(--text-light);
+transition: all 0.3s ease; /* Thêm transition */
+}
+.search-box input:focus {
+border-color: var(--primary);
+box-shadow: 0 0 10px rgba(0, 224, 255, 0.5);
+}
+
+/* Language switcher - Optimized */
+.lang-switcher {
+display: flex;
+background: var(--lang-bg); /* Use a darker background */
+border-radius: 8px;
+overflow: hidden;
+box-shadow: 0 0 12px rgba(0, 0, 0, 0.5); /* Softer, more defined shadow */
+position: relative;
+padding: 3px;
+transition: all 0.3s ease-in-out;
+}
+
+.lang-switcher::before {
+content: "";
+position: absolute;
+top: 3px;
+bottom: 3px;
+width: calc(50% - 3px);
+background: var(--primary);
+border-radius: 6px;
+z-index: 1;
+transition: transform 0.3s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+}
+
+.lang-switcher.en::before {
+transform: translateX(100%);
+}
+
+.lang-switcher button {
+background: transparent;
+border: none;
+color: var(--text-light);
+padding: 8px 18px;
+font-weight: 600;
+cursor: pointer;
+transition: all 0.3s ease-in-out;
+position: relative;
+z-index: 2;
+flex: 1;
+user-select: none;
+outline: none;
+font-size: 15px;
+}
+
+.lang-switcher button:hover:not(.active) {
+color: var(--highlight);
+transform: translateY(-1px);
+}
+
+.lang-switcher button.active {
+color: var(--bg-dark);
+font-weight: 700;
+}
+
+.lang-switcher button.active:hover {
+color: var(--bg-dark);
+transform: none;
+}
+
+/* Login button */
+#login-btn {
+padding: 10px 20px; /* Tăng padding */
+border-radius: 25px; /* Bo tròn hơn */
+background: var(--gradient-btn); /* Áp dụng gradient */
+color: #000;
+font-weight: 700;
+transition: all 0.3s ease-in-out;
+display: flex;
+align-items: center;
+gap: 8px; /* Tăng khoảng cách icon */
+box-shadow: 0 4px 15px rgba(0, 224, 255, 0.3); /* Bóng đổ ban đầu */
+}
+#login-btn:hover {
+background: var(--gradient-btn-hover); /* Gradient hover */
+box-shadow: 0 6px 20px rgba(255, 193, 7, 0.5); /* Bóng đổ mạnh hơn */
+transform: translateY(-4px) scale(1.02); /* Hiệu ứng nổi bật hơn */
+}
+
+/* Thêm kiểu dáng cho nút khi đã đăng nhập */
+#login-btn.logged-in {
+background: var(--highlight); /* Màu highlight khi đăng nhập */
+color: var(--bg-dark); /* Chữ tối */
+box-shadow: 0 4px 15px rgba(255, 193, 7, 0.3);
+}
+#login-btn.logged-in:hover {
+background: var(--primary); /* Hover về màu primary */
+box-shadow: 0 6px 20px rgba(0, 224, 255, 0.5);
+}
+
+/* Style cho liên kết Tài khoản (account-link-wrapper) */
+.account-link-wrapper {
+position: relative;
+transition: all 0.3s ease-in-out;
+}
+.account-link-wrapper .account-link-content {
+display: flex;
+align-items: center;
+gap: 5px;
+text-decoration: none;
+color: var(--primary);
+font-weight: 500;
+cursor: pointer;
+padding: 8px 12px;
+border: 1px solid var(--primary);
+border-radius: 20px;
+background: linear-gradient(
+45deg,
+rgba(0, 224, 255, 0.05),
+rgba(0, 224, 255, 0.15)
+);
+transition: all 0.3s ease-in-out;
+}
+.account-link-wrapper .account-link-content i {
+font-size: 16px;
+}
+/* Khi hover lên account-link-wrapper, màu chữ của account-link-content sẽ là highlight */
+.account-link-wrapper:hover .account-link-content {
+color: var(--highlight);
+border-color: var(--highlight);
+box-shadow: 0 0 12px rgba(0, 224, 255, 0.7);
+background: linear-gradient(
+45deg,
+rgba(255, 193, 7, 0.1),
+rgba(255, 193, 7, 0.3)
+);
+transform: translateY(-2px) scale(1.02);
+}
+
+/* Dropdown Menu for Account */
+.account-dropdown {
+position: absolute;
+top: calc(100% + 10px);
+left: 0;
+background-color: var(--card-bg);
+border-radius: 10px; /* Bo tròn hơn */
+box-shadow: 0 10px 20px rgba(0, 0, 0, 0.6); /* Bóng đổ mạnh hơn */
+min-width: 180px; /* Rộng hơn chút */
+z-index: 1000;
+opacity: 0;
+visibility: hidden;
+transform: translateY(-15px); /* Trượt lên/xuống xa hơn */
+transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s;
+border: 1px solid rgba(255, 255, 255, 0.1); /* Border nhẹ */
+}
+.account-dropdown.show {
+opacity: 1;
+visibility: visible;
+transform: translateY(0);
+}
+.account-dropdown a {
+color: var(--text-light);
+padding: 12px 18px; /* Tăng padding */
+text-decoration: none;
+display: flex;
+align-items: center;
+gap: 12px; /* Tăng khoảng cách giữa icon và text */
+font-weight: normal;
+transition: background-color 0.2s ease, color 0.2s ease;
+border-radius: 8px;
+border: none;
+transform: none;
+box-shadow: none;
+}
+.account-dropdown a:hover {
+background-color: var(--lang-bg); /* Màu nền khi hover */
+color: var(--primary);
+transform: none;
+text-shadow: none;
+}
+
+/* Modal */
+.modal {
+position: fixed;
+top: 0;
+left: 0;
+width: 100vw;
+height: 100vh;
+background: rgba(0, 0, 0, 0.85); /* Lớp phủ tối hơn */
+display: none;
+align-items: center;
+justify-content: center;
+z-index: 1500;
+opacity: 0;
+transition: opacity 0.4s ease-out; /* Giữ transition cho độ mờ của lớp phủ */
+}
+.modal.active {
+display: flex;
+opacity: 1;
+}
+.modal-content {
+background: var(--card-bg);
+padding: 30px 40px;
+border-radius: 15px;
+width: 380px; /* Rộng hơn chút */
+max-width: 90%;
+box-shadow: 0 0 30px rgba(0, 224, 255, 0.6); /* Bóng đổ mạnh hơn */
+position: relative;
+color: var(--text-light);
+transform: translateY(-100px); /* Bắt đầu từ trên cao hơn */
+opacity: 0;
+transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+opacity 0.5s ease-out;
+outline: none;
+tabindex: -1;
+border: 1px solid var(--primary); /* Thêm border */
+}
+.modal.active .modal-content {
+transform: translateY(0);
+opacity: 1;
+}
+
+.modal-content h3 {
+margin: 0 0 25px 0; /* Tăng margin bottom */
+color: var(--highlight);
+text-align: center;
+user-select: none;
+font-size: 28px; /* To hơn */
+text-shadow: 0 0 5px var(--highlight);
+}
+.modal-content label {
+display: block;
+margin-bottom: 8px; /* Tăng margin bottom */
+font-weight: 600;
+font-size: 15px; /* Tăng kích thước font */
+color: var(--primary);
+user-select: none;
+}
+.modal-content input {
+width: 100%;
+padding: 12px 15px; /* Tăng padding */
+margin-bottom: 20px; /* Tăng margin bottom */
+border: 1px solid #333; /* Border rõ ràng hơn */
+border-radius: 8px;
+font-size: 15px; /* Tăng kích thước font */
+background: #222b39;
+color: var(--text-light);
+outline: none;
+transition: box-shadow 0.3s ease, border-color 0.3s ease;
+}
+.modal-content input:focus {
+border-color: var(--primary); /* Border màu primary khi focus */
+box-shadow: 0 0 10px rgba(0, 224, 255, 0.5); /* Bóng đổ rõ hơn */
+}
+.modal-content button[type="submit"] {
+width: 100%;
+background: var(--gradient-btn); /* Áp dụng gradient */
+border: none;
+padding: 14px 0; /* Tăng padding */
+border-radius: 10px;
+color: #000;
+font-weight: 700;
+font-size: 17px; /* Tăng kích thước font */
+cursor: pointer;
+transition: all 0.3s ease-in-out;
+box-shadow: 0 4px 15px rgba(0, 224, 255, 0.3);
+}
+.modal-content button[type="submit"]:hover {
+background: var(--gradient-btn-hover); /* Gradient hover */
+box-shadow: 0 6px 20px rgba(255, 193, 7, 0.5);
+transform: translateY(-3px) scale(1.02); /* Giảm nhẹ scale */
+}
+.modal-close {
+position: absolute;
+top: 14px;
+right: 18px;
+font-size: 28px; /* To hơn */
+color: var(--highlight);
+cursor: pointer;
+user-select: none;
+transition: color 0.3s ease, transform 0.3s ease, text-shadow 0.3s ease;
+}
+.modal-close:hover {
+color: var(--primary);
+text-shadow: 0 0 10px var(--primary);
+transform: rotate(90deg) scale(1.1); /* Hiệu ứng xoay và phóng to */
+}
+
+/* Added styles for form switching */
+.form-switch-link {
+display: block;
+text-align: center;
+margin-top: 18px; /* Tăng margin top */
+font-size: 14px; /* Tăng font size */
+color: var(--link-color);
+cursor: pointer;
+text-decoration: underline;
+transition: color 0.2s ease;
+}
+.form-switch-link:hover {
+color: var(--link-hover-color);
+}
+.modal-content form {
+display: none; /* Mặc định ẩn tất cả các form */
+}
+.modal-content form.active-form {
+display: block; /* Chỉ hiển thị form active */
+}
+
+/* THÊM CSS MỚI CHO THÔNG BÁO LỖI */
+.error-message {
+color: var(--highlight); /* Màu đỏ cảnh báo */
+font-size: 13px; /* Tăng kích thước font */
+margin-top: -15px; /* Kéo lên gần input */
+margin-bottom: 18px; /* Khoảng cách với label tiếp theo */
+text-align: left;
+height: 0; /* Mặc định ẩn */
+overflow: hidden; /* Ẩn nội dung tràn */
+opacity: 0;
+transition: height 0.3s ease-out, opacity 0.3s ease-out;
+}
+
+.error-message.show {
+height: 20px; /* Chiều cao khi hiển thị */
+opacity: 1;
+}
+
+/* Thêm CSS cho Input Validation Feedback */
+.modal-content input.error {
+border: 2px solid var(--highlight); /* Viền màu highlight khi có lỗi */
+box-shadow: 0 0 8px rgba(255, 193, 7, 0.7);
+}
+
+/* Style cho nút submit khi đang loading */
+.modal-content button[type="submit"].loading {
+background: #555; /* Màu xám hơn */
+cursor: not-allowed;
+position: relative;
+color: transparent; /* Ẩn text gốc */
+box-shadow: none;
+transform: none;
+}
+.modal-content button[type="submit"].loading::after {
+content: "";
+position: absolute;
+width: 24px; /* To hơn */
+height: 24px; /* To hơn */
+border: 4px solid rgba(255, 255, 255, 0.3); /* Dày hơn */
+border-top-color: var(--primary); /* Màu spinner */
+border-radius: 50%;
+animation: spin 0.8s linear infinite;
+left: 50%;
+top: 50%;
+transform: translate(-50%, -50%);
+}
+
+@keyframes spin {
+to {
+transform: translate(-50%, -50%) rotate(360deg);
+}
+}
+
+/* Style cho lớp phủ khi form đang xử lý */
+.modal-content.processing::before {
+content: "";
+position: absolute;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+background: rgba(26, 29, 41, 0.85); /* Màu card-bg có độ mờ và tối hơn */
+border-radius: 15px;
+z-index: 10;
+display: flex;
+align-items: center;
+justify-content: center;
+pointer-events: all;
+}
+/* Spinner cho lớp phủ */
+.modal-content.processing::after {
+content: "";
+position: absolute;
+width: 50px; /* To hơn */
+height: 50px; /* To hơn */
+border: 5px solid rgba(0, 224, 255, 0.3); /* Dày hơn */
+border-top-color: var(--primary);
+border-radius: 50%;
+animation: spin 1s cubic-bezier(0.68, -0.55, 0.27, 1.55) infinite; /* Hiệu ứng spin mượt mà hơn */
+z-index: 11;
+left: 50%;
+top: 50%;
+transform: translate(-50%, -50%);
+}
+
+/* Toast Notification Styles */
+#toast-container {
+position: fixed;
+top: 20px;
+right: 20px;
+z-index: 2000;
+display: flex;
+flex-direction: column;
+gap: 12px; /* Tăng khoảng cách */
+max-width: 350px; /* Rộng hơn chút */
+}
+
+.toast {
+background-color: var(--card-bg);
+color: var(--text-light);
+padding: 15px 22px; /* Tăng padding */
+border-radius: 10px; /* Bo tròn hơn */
+box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4); /* Bóng đổ mạnh hơn */
+display: flex;
+align-items: center;
+gap: 12px;
+opacity: 0;
+transform: translateX(110%); /* Trượt xa hơn */
+transition: opacity 0.5s ease-out, transform 0.5s ease-out; /* Chuyển động mượt hơn */
+}
+.toast.show {
+opacity: 1;
+transform: translateX(0);
+}
+.toast.hide {
+opacity: 0;
+transform: translateX(110%);
+}
+
+.toast.success {
+border-left: 6px solid #28a745; /* Dày hơn */
+}
+.toast.error {
+border-left: 6px solid #dc3545; /* Dày hơn */
+}
+.toast.info {
+border-left: 6px solid var(--primary); /* Dày hơn */
+}
+
+.toast i {
+font-size: 22px; /* To hơn */
+margin-right: 5px;
+}
+
+/* HERO */
+.hero {
+display: flex;
+align-items: center;
+justify-content: space-between;
+padding: 70px 50px; /* Tăng padding */
+background: var(--gradient-bg); /* Áp dụng gradient */
+flex-wrap: wrap;
+border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+.hero-text span {
+font-weight: 600;
+color: var(--highlight);
+user-select: none;
+font-size: 1.1em; /* Tăng nhẹ font */
+}
+.hero-text h2 {
+font-size: 42px; /* To hơn */
+color: var(--primary);
+transition: transform 0.3s ease, color 0.3s ease, text-shadow 0.3s ease;
+margin: 15px 0 25px 0; /* Tăng margin */
+user-select: none;
+}
+.hero-text h2:hover {
+transform: translateX(5px) scale(1.02); /* Dịch nhẹ và phóng to */
+color: var(--highlight);
+text-shadow: 0 0 15px var(--highlight);
+}
+.hero-text p {
+color: var(--text-muted);
+font-size: 19px; /* To hơn */
+margin: 25px 0; /* Tăng margin */
+transition: transform 0.3s ease, color 0.3s ease;
+user-select: none;
+line-height: 1.7; /* Tăng khoảng cách dòng */
+}
+.hero-text p:hover {
+transform: translateY(-2px);
+color: var(--text-light); /* Chữ sáng hơn khi hover */
+}
+.hero-buttons button {
+padding: 12px 25px; /* Tăng padding */
+margin-right: 15px; /* Tăng khoảng cách */
+border: none;
+border-radius: 8px; /* Bo tròn hơn */
+cursor: pointer;
+font-weight: bold;
+transition: all 0.3s ease-in-out;
+font-size: 17px; /* To hơn */
+box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* Bóng đổ ban đầu */
+}
+.btn-primary {
+background: var(--gradient-btn); /* Áp dụng gradient */
+color: #000;
+}
+.btn-primary:hover {
+background: var(--gradient-btn-hover);
+box-shadow: 0 6px 20px rgba(255, 193, 7, 0.5); /* Bóng đổ mạnh hơn */
+transform: translateY(-4px) scale(1.02);
+}
+.btn-secondary {
+background-color: #2d2f3a;
+color: var(--text-light);
+border: 1px solid var(--primary); /* Thêm border */
+}
+.btn-secondary:hover {
+background-color: #44475a;
+box-shadow: 0 6px 20px rgba(0, 224, 255, 0.5); /* Bóng đổ mạnh hơn */
+transform: translateY(-4px) scale(1.02);
+}
+.hero img {
+max-width: 48%; /* Tăng nhẹ kích thước ảnh */
+border-radius: 15px; /* Bo tròn hơn */
+animation: fadeIn 2s ease-in;
+transition: transform 0.4s ease-in-out, box-shadow 0.4s ease-in-out,
+filter 0.4s ease; /* Thêm filter */
+box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5); /* Bóng đổ ban đầu */
+filter: brightness(0.95); /* Giảm nhẹ độ sáng */
+}
+.hero img:hover {
+transform: scale(1.04) rotate(1deg); /* Hiệu ứng nổi bật hơn */
+box-shadow: 0 12px 35px rgba(0, 224, 255, 0.6); /* Bóng đổ mạnh hơn */
+filter: brightness(1.1); /* Làm sáng ảnh */
+}
+@keyframes fadeIn {
+from {
+opacity: 0;
+transform: translateY(30px); /* Bắt đầu từ thấp hơn */
+}
+to {
+opacity: 1;
+transform: translateY(0);
+}
+}
+
+/* SECTION */
+.section {
+background-color: var(--card-bg);
+padding: 70px 50px; /* Tăng padding */
+text-align: center;
+border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+.section h2 {
+color: var(--highlight);
+font-size: 34px; /* To hơn */
+margin-bottom: 15px; /* Tăng margin */
+transition: transform 0.3s ease, text-shadow 0.3s ease;
+user-select: none;
+text-shadow: 0 0 5px rgba(255, 193, 7, 0.3);
+}
+.section h2:hover {
+transform: translateY(-5px) scale(1.03); /* Nổi bật hơn */
+text-shadow: 0 0 15px var(--highlight);
+}
+.section p {
+color: var(--text-muted);
+font-size: 17px; /* To hơn */
+margin-bottom: 50px; /* Tăng margin */
+transition: transform 0.3s ease, color 0.3s ease;
+user-select: none;
+line-height: 1.7;
+}
+.section p:hover {
+transform: translateY(-2px);
+color: var(--text-light);
+}
+.features {
+display: flex;
+justify-content: center; /* Dùng center thay vì space-around */
+gap: 30px; /* Tăng khoảng cách */
+flex-wrap: wrap;
+}
+.feature-box {
+background: #141622;
+padding: 25px; /* Tăng padding */
+border-radius: 12px; /* Bo tròn hơn */
+width: 280px; /* Rộng hơn */
+color: var(--text-light);
+transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out,
+filter 0.3s ease, background-color 0.3s ease;
+box-shadow: 0 0 15px rgba(0, 0, 0, 0.3); /* Bóng đổ ban đầu */
+filter: brightness(1);
+user-select: none;
+border: 1px solid rgba(0, 224, 255, 0.1); /* Border nhẹ */
+}
+.feature-box:hover {
+transform: translateY(-10px) scale(1.03); /* Nâng cao và phóng to hơn */
+box-shadow: 0 12px 40px rgba(0, 255, 255, 0.5); /* Bóng đổ mạnh hơn, sáng hơn */
+filter: brightness(1.2); /* Làm sáng hơn */
+background-color: #1a1d29; /* Thay đổi nền nhẹ */
+}
+.feature-box h3 {
+color: var(--primary);
+transition: color 0.3s ease;
+font-size: 22px; /* To hơn */
+margin-bottom: 15px;
+}
+.feature-box h3:hover {
+color: var(--highlight);
+text-shadow: 0 0 8px var(--highlight);
+}
+.feature-box p {
+font-size: 15px; /* Tăng font */
+line-height: 1.6;
+}
+
+/* New Section: How to Use KrualX */
+.how-to-use-section {
+background-color: var(--dark-blue);
+padding: 70px 50px; /* Tăng padding */
+text-align: left;
+color: var(--text-light);
+overflow: hidden;
+border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.how-to-use-section h2 {
+font-size: 34px; /* To hơn */
+color: var(--primary);
+margin-bottom: 40px; /* Tăng margin */
+text-align: left;
+transition: color 0.3s ease, transform 0.3s ease,
+text-shadow 0.3s ease; /* Thêm transition */
+user-select: none;
+text-shadow: 0 0 5px rgba(0, 224, 255, 0.3);
+}
+.how-to-use-section h2:hover {
+color: var(--highlight);
+transform: translateX(15px); /* Dịch chuyển rõ hơn */
+text-shadow: 0 0 20px rgba(255, 193, 7, 0.8); /* Bóng đổ mạnh hơn */
+}
+
+.how-to-use-content {
+display: flex;
+align-items: center;
+justify-content: space-between;
+gap: 50px; /* Tăng khoảng cách */
+flex-wrap: wrap;
+}
+
+.how-to-use-steps {
+flex: 1;
+min-width: 320px; /* Tăng min-width */
+max-width: 50%;
+}
+
+.step-item {
+margin-bottom: 30px; /* Tăng khoảng cách */
+display: flex;
+align-items: flex-start;
+gap: 20px; /* Tăng khoảng cách */
+background-color: rgba(26, 29, 41, 0.6); /* Nền nhẹ và tối hơn */
+padding: 20px 25px; /* Tăng padding */
+border-radius: 12px; /* Bo tròn hơn */
+border: 1px solid rgba(0, 224, 255, 0.05); /* Border nhẹ ban đầu */
+transition: background-color 0.3s ease, transform 0.3s ease,
+box-shadow 0.3s ease, border-color 0.3s ease;
+user-select: none;
+box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+.step-item:hover {
+background-color: rgba(0, 224, 255, 0.12); /* Nền hơi xanh khi hover */
+transform: translateY(-8px) scale(1.01); /* Nâng nhẹ và phóng to hơn */
+box-shadow: 0 10px 25px rgba(0, 224, 255, 0.3); /* Bóng đổ mạnh hơn */
+border-color: var(--primary); /* Đổi màu border */
+}
+
+.step-number {
+font-size: 28px; /* To hơn */
+font-weight: 700;
+color: var(--highlight);
+background: var(--purple-dark);
+border-radius: 50%;
+width: 45px; /* Lớn hơn */
+height: 45px; /* Lớn hơn */
+display: flex;
+align-items: center;
+justify-content: center;
+flex-shrink: 0;
+box-shadow: 0 5px 12px rgba(0, 0, 0, 0.4);
+transition: background-color 0.3s ease, color 0.3s ease,
+transform 0.3s ease, box-shadow 0.3s ease;
+border: 1px solid var(--highlight);
+}
+.step-number:hover {
+background-color: var(--highlight);
+color: var(--bg-dark);
+transform: scale(1.25) rotate(8deg); /* Phóng to và xoay rõ hơn */
+box-shadow: 0 8px 20px rgba(255, 193, 7, 0.7);
+}
+
+.step-text h3 {
+font-size: 22px; /* To hơn */
+color: var(--primary);
+margin: 0 0 8px 0; /* Tăng margin */
+transition: color 0.3s ease, transform 0.3s ease;
+}
+.step-item:hover .step-text h3 {
+color: var(--highlight);
+transform: translateX(8px); /* Dịch chuyển rõ hơn */
+}
+
+.step-text p {
+font-size: 16px; /* To hơn */
+color: var(--text-muted);
+line-height: 1.7;
+margin: 0;
+transition: color 0.3s ease;
+}
+.step-item:hover .step-text p {
+color: var(--text-light);
+}
+
+.how-to-use-image {
+flex: 1;
+min-width: 320px; /* Tăng min-width */
+max-width: 48%; /* Tăng nhẹ kích thước ảnh */
+text-align: center;
+}
+
+.how-to-use-image img {
+max-width: 100%;
+height: auto;
+border-radius: 15px; /* Bo tròn hơn */
+box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6); /* Bóng đổ mạnh hơn */
+transition: transform 0.4s ease, box-shadow 0.4s ease, filter 0.4s ease;
+filter: saturate(1.1) brightness(0.9); /* Tăng độ bão hòa, giảm sáng nhẹ */
+}
+.how-to-use-image img:hover {
+transform: scale(1.06) rotate(2deg); /* Phóng to và xoay rõ hơn */
+box-shadow: 0 15px 40px rgba(0, 224, 255, 0.7); /* Bóng đổ mạnh hơn và màu xanh */
+filter: saturate(1.3) brightness(1.1); /* Làm sáng và bão hòa hơn */
+}
+
+/* Social Links styling */
+.social-links {
+margin-top: 30px; /* Tăng khoảng cách */
+display: flex;
+justify-content: center;
+gap: 20px; /* Tăng khoảng cách giữa các icon */
+flex-wrap: wrap;
+}
+
+.social-links a {
+color: var(--primary);
+font-size: 35px; /* Kích thước icon to hơn */
+transition: color 0.3s ease, transform 0.3s ease, filter 0.3s ease;
+text-decoration: none;
+}
+
+.social-links a:hover {
+color: var(--text-light);
+transform: translateY(-8px) scale(1.15); /* Hiệu ứng nổi bật hơn */
+filter: drop-shadow(0 0 15px rgba(255, 255, 255, 0.9)); /* Hiệu ứng phát sáng mạnh hơn */
+}
+
+.how-to-use-section .btn-contact {
+display: inline-flex;
+align-items: center;
+gap: 10px; /* Tăng khoảng cách icon */
+margin-top: 40px; /* Tăng margin */
+padding: 14px 30px; /* Tăng padding */
+background: var(--gradient-btn); /* Áp dụng gradient */
+color: #000;
+font-weight: 700;
+border: none;
+border-radius: 8px;
+cursor: pointer;
+font-size: 17px; /* To hơn */
+transition: all 0.3s ease-in-out;
+box-shadow: 0 4px 15px rgba(0, 224, 255, 0.3);
+}
+
+.how-to-use-section .btn-contact:hover {
+background: var(--gradient-btn-hover);
+box-shadow: 0 6px 20px rgba(255, 193, 7, 0.5);
+transform: translateY(-4px) scale(1.02);
+}
+
+/* FOOTER */
+.footer {
+background: var(--gradient-bg); /* Áp dụng gradient */
+padding: 50px; /* Tăng padding */
+text-align: center;
+color: var(--text-muted);
+font-size: 15px; /* Tăng font size */
+transition: transform 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+margin-top: auto;
+border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+.footer:hover {
+transform: translateY(-3px) scale(1.01); /* Hiệu ứng nổi bật hơn */
+color: var(--highlight);
+box-shadow: 0 -5px 20px rgba(0, 0, 0, 0.4);
+}
+
+/* Hiệu ứng trượt lên khi cuộn */
+.animated-section {
+opacity: 0;
+transform: translateY(60px); /* Bắt đầu từ vị trí thấp hơn */
+transition: opacity 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94); /* Hàm thời gian mượt mà */
+}
+
+.animated-section.is-visible {
+opacity: 1;
+transform: translateY(0);
+}
+
+/* Account Info Page Styles (Added/Modified for SPA) */
+.message-no-login {
+color: var(--highlight);
+font-size: 22px; /* To hơn */
+text-align: center;
+max-width: 600px; /* Rộng hơn */
+padding: 40px; /* Tăng padding */
+border-radius: 15px;
+background-color: var(--card-bg);
+box-shadow: 0 0 25px rgba(255, 193, 7, 0.3);
+border: 1px solid var(--highlight);
+}
+.message-no-login a {
+color: var(--primary);
+text-decoration: underline;
+transition: color 0.3s ease;
+font-weight: 600;
+}
+.message-no-login a:hover {
+color: var(--highlight);
+text-shadow: 0 0 5px var(--primary);
+}
+
+/* Full Page Loader (Updated for Progress Bar) */
+#full-page-loader {
+position: fixed;
+top: 0;
+left: 0;
+width: 100vw;
+height: 100vh;
+background: rgba(0, 0, 0, 0.95); /* Nền tối và mờ hơn */
+display: flex;
+align-items: center;
+justify-content: center;
+z-index: 2500;
+opacity: 0;
+visibility: hidden;
+transition: opacity 0.6s ease, visibility 0.6s ease;
+flex-direction: column;
+gap: 25px; /* Tăng khoảng cách */
+}
+
+#full-page-loader.show {
+opacity: 1;
+visibility: visible;
+}
+
+.progress-container {
+width: 70%; /* Chiều rộng của thanh ngang */
+max-width: 450px; /* Chiều rộng tối đa */
+background-color: #222b39; /* Nền của thanh loading */
+border-radius: 15px; /* Bo tròn hơn */
+height: 12px; /* Chiều cao của thanh */
+overflow: hidden;
+box-shadow: 0 0 20px rgba(0, 224, 255, 0.6); /* Hiệu ứng sáng bóng mạnh hơn */
+border: 1px solid var(--primary);
+}
+
+.progress-bar {
+height: 100%;
+width: 0%;
+background: var(--gradient-btn); /* Áp dụng gradient */
+border-radius: 15px;
+transition: width 0.3s ease-out;
+}
+
+.progress-text {
+color: var(--text-light);
+font-size: 1.4em; /* To hơn */
+font-weight: 700;
+text-shadow: 0 0 8px var(--primary); /* Hiệu ứng chữ sáng rõ hơn */
+}
+
+/* Account Center Page Styles */
+.account-center-main-content {
+flex-grow: 1;
+display: flex;
+flex-direction: column;
+padding: 50px 30px; /* Tăng padding */
+align-items: center;
+opacity: 0;
+transform: translateY(30px);
+transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+}
+.account-center-main-content.active {
+opacity: 1;
+transform: translateY(0);
+}
+
+.account-center-container {
+background-color: var(--card-bg);
+border-radius: 20px; /* Bo tròn hơn */
+box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7); /* Bóng đổ mạnh hơn */
+max-width: 950px; /* Tăng chiều rộng tối đa */
+width: 100%;
+display: flex;
+flex-direction: column;
+overflow: hidden;
+border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.account-center-header {
+background-color: var(--dark-blue);
+padding: 30px 40px; /* Tăng padding */
+border-bottom: 1px solid rgba(255, 255, 255, 0.15); /* Border rõ hơn */
+text-align: center;
+}
+.account-center-header h2 {
+color: var(--primary);
+margin: 0;
+font-size: 36px; /* To hơn */
+text-shadow: 0 0 8px rgba(0, 224, 255, 0.4);
+}
+.account-center-header p {
+color: var(--text-muted);
+font-size: 17px; /* To hơn */
+margin-top: 15px; /* Tăng margin */
+line-height: 1.6;
+}
+
+.account-center-body {
+display: flex;
+flex-direction: column;
+flex-grow: 1;
+}
+
+.account-center-sidebar {
+background-color: var(--lang-bg);
+padding: 25px; /* Tăng padding */
+min-width: 220px; /* Rộng hơn */
+border-right: 1px solid rgba(255, 255, 255, 0.08);
+}
+.account-center-sidebar ul {
+list-style: none;
+padding: 0;
+margin: 0;
+}
+.account-center-sidebar li {
+margin-bottom: 12px; /* Tăng khoảng cách */
+}
+.account-center-sidebar button {
+width: 100%;
+padding: 14px 18px; /* Tăng padding */
+border: none;
+border-radius: 10px; /* Bo tròn hơn */
+background-color: transparent;
+color: var(--text-light);
+text-align: left;
+font-size: 17px; /* To hơn */
+cursor: pointer;
+transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease,
+box-shadow 0.2s ease;
+display: flex;
+align-items: center;
+gap: 12px; /* Tăng khoảng cách */
+}
+.account-center-sidebar button:hover {
+background-color: rgba(0, 224, 255, 0.15); /* Nền sáng hơn khi hover */
+color: var(--primary);
+transform: translateX(8px); /* Dịch chuyển rõ hơn */
+box-shadow: 0 4px 10px rgba(0, 224, 255, 0.2);
+}
+.account-center-sidebar button.active-tab {
+background: var(--gradient-btn); /* Gradient khi active */
+color: var(--bg-dark);
+font-weight: bold;
+box-shadow: 0 6px 15px rgba(0, 224, 255, 0.4); /* Bóng đổ mạnh hơn */
+transform: translateX(0); /* Bỏ translate khi active */
+}
+.account-center-sidebar button.active-tab i {
+color: var(--bg-dark);
+}
+.account-center-sidebar button i {
+font-size: 20px; /* To hơn */
+color: var(--primary);
+transition: color 0.3s ease;
+}
+
+.account-center-content {
+flex-grow: 1;
+padding: 40px; /* Tăng padding */
+background-color: var(--card-bg);
+}
+.account-center-content h3 {
+color: var(--highlight);
+font-size: 28px; /* To hơn */
+margin-bottom: 30px; /* Tăng margin */
+text-align: center;
+text-shadow: 0 0 5px rgba(255, 193, 7, 0.3);
+}
+
+/* Tab Content Styling */
+.tab-content-item {
+display: none;
+opacity: 0;
+transform: translateY(20px); /* Trượt xa hơn */
+transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+}
+.tab-content-item.active-tab-content {
+display: block;
+opacity: 1;
+transform: translateY(0);
+}
+
+/* Personal Info Tab */
+.info-grid {
+display: grid;
+grid-template-columns: 1fr;
+gap: 20px 30px; /* Tăng khoảng cách */
+max-width: 550px; /* Rộng hơn */
+margin: 0 auto;
+text-align: left;
+}
+.info-item {
+display: flex;
+flex-direction: column;
+gap: 8px; /* Tăng khoảng cách */
+}
+.info-item label {
+font-weight: 600;
+color: var(--primary);
+font-size: 16px; /* To hơn */
+}
+.info-item p {
+background-color: #222b39;
+padding: 12px 18px; /* Tăng padding */
+border-radius: 10px; /* Bo tròn hơn */
+color: var(--text-light);
+font-size: 16px; /* To hơn */
+margin: 0;
+border: 1px solid #333;
+}
+
+/* CSS cho select và input mới trong .info-item */
+.info-item select,
+.info-item input[type="email"],
+.info-item input[type="tel"] {
+  padding: 12px 18px;
+  background-color: #222b39;
+  color: var(--text-light);
+  border: 1px solid #333;
+  border-radius: 10px;
+  font-size: 16px;
+  outline: none;
+  transition: box-shadow 0.3s ease, border-color 0.3s ease;
+  width: 100%; /* Đảm bảo nó chiếm đủ chiều rộng */
+  box-sizing: border-box; /* Quan trọng để padding không làm tăng chiều rộng */
+  -webkit-appearance: none; /* Bỏ giao diện mặc định của trình duyệt */
+  -moz-appearance: none;
+  appearance: none;
+  background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23ffffff%22%20d%3D%22M287%2069.9a14.6%2014.6%200%2000-20.7%200L146.2%20189.9%2026%2069.9a14.6%2014.6%200%2000-20.7%2020.7L135.9%20210.3c.4.4.8.7%201.2%201.1.2.2.4.4.7.6a14.6%2014.6%200%200018.6%200l110.6-119.7a14.6%2014.6%200%20000-20.7z%22%2F%3E%3C%2Fsvg%3E'); /* Icon mũi tên xuống */
+  background-repeat: no-repeat;
+  background-position: right 15px center;
+  background-size: 12px;
+}
+
+.info-item select:focus,
+.info-item input:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 10px rgba(0, 224, 255, 0.5);
+}
+
+
+/* Change Password Tab */
+.change-password-form label {
+display: block;
+margin-bottom: 10px; /* Tăng margin */
+font-weight: 600;
+font-size: 16px; /* To hơn */
+color: var(--primary);
+}
+.change-password-form input {
+width: 100%;
+padding: 12px 15px;
+margin-bottom: 25px; /* Tăng margin */
+border: 1px solid #333;
+border-radius: 8px;
+background-color: #1a1d29;
+color: var(--text-light);
+font-size: 15px;
+outline: none;
+transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+.change-password-form input:focus {
+border-color: var(--primary);
+box-shadow: 0 0 10px rgba(0, 224, 255, 0.5);
+}
+.change-password-form button {
+width: 100%;
+padding: 14px 0; /* Tăng padding */
+background: var(--gradient-btn); /* Áp dụng gradient */
+color: #000;
+font-weight: 700;
+border: none;
+border-radius: 10px;
+cursor: pointer;
+font-size: 17px;
+transition: all 0.3s ease-in-out;
+box-shadow: 0 4px 15px rgba(0, 224, 255, 0.3);
+}
+.change-password-form button:hover {
+background: var(--gradient-btn-hover);
+box-shadow: 0 6px 20px rgba(255, 193, 7, 0.5);
+transform: translateY(-3px) scale(1.02);
+}
+/* Error message for Change Password form */
+.change-password-form .error-message {
+margin-top: -15px;
+margin-bottom: 18px;
+font-size: 13px;
+}
+
+/* Transaction History Tab (Example) */
+.transaction-history ul {
+list-style: none;
+padding: 0;
+margin: 0;
+}
+.transaction-history li {
+background-color: #1a1d29;
+padding: 18px; /* Tăng padding */
+margin-bottom: 12px; /* Tăng khoảng cách */
+border-radius: 10px; /* Bo tròn hơn */
+display: flex;
+justify-content: space-between;
+align-items: center;
+border-left: 6px solid var(--primary); /* Dày hơn */
+transition: transform 0.3s ease, box-shadow 0.3s ease,
+background-color 0.3s ease;
+}
+.transaction-history li:hover {
+transform: translateX(8px); /* Dịch chuyển rõ hơn */
+box-shadow: 0 6px 20px rgba(0, 224, 255, 0.3); /* Bóng đổ mạnh hơn */
+background-color: #222b39; /* Nền thay đổi nhẹ khi hover */
+}
+.transaction-history .transaction-details {
+text-align: left;
+}
+.transaction-history .transaction-details strong {
+color: var(--primary);
+font-size: 17px; /* To hơn */
+display: block;
+margin-bottom: 6px; /* Tăng margin */
+}
+.transaction-history .transaction-details span {
+color: var(--text-muted);
+font-size: 14px; /* To hơn */
+}
+.transaction-history .transaction-amount {
+font-weight: bold;
+font-size: 20px; /* To hơn */
+color: var(--highlight);
+}
+.transaction-history .transaction-amount.negative {
+color: #dc3545; /* Màu đỏ cho giao dịch âm */
+}
+.transaction-history .no-transactions {
+color: var(--text-muted);
+font-style: italic;
+text-align: center;
+padding: 25px; /* Tăng padding */
+border: 1px dashed rgba(255, 255, 255, 0.15); /* Rõ hơn */
+border-radius: 10px;
+font-size: 16px;
+}
+
+/* New: Product Page Styles */
+.products-page-content {
+text-align: center;
+padding: 60px 40px;
+background-color: var(--card-bg);
+border-radius: 15px;
+box-shadow: 0 8px 25px rgba(0, 0, 0, 0.6);
+width: 100%;
+display: flex;
+flex-direction: column;
+align-items: center;
+}
+
+.products-grid {
+display: flex;
+flex-wrap: wrap;
+justify-content: center;
+gap: 35px; /* Tăng khoảng cách */
+margin-top: 40px;
+width: 100%;
+}
+
+.product-item {
+background-color: #1a1d29;
+border: 1px solid rgba(0, 224, 255, 0.25); /* Border rõ hơn */
+border-radius: 15px; /* Bo tròn hơn */
+padding: 30px; /* Tăng padding */
+flex: 1 1 calc(33% - 50px); /* 3 cột trên desktop, có gap lớn hơn */
+max-width: 380px; /* Rộng hơn */
+text-align: center;
+box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4); /* Bóng đổ mạnh hơn */
+transition: transform 0.3s ease, box-shadow 0.3s ease,
+border-color 0.3s ease;
+display: flex;
+flex-direction: column;
+justify-content: space-between;
+}
+
+.product-item:hover {
+transform: translateY(-10px) scale(1.03); /* Nổi bật hơn */
+box-shadow: 0 12px 30px rgba(0, 224, 255, 0.5); /* Bóng đổ mạnh hơn */
+border-color: var(--primary); /* Đổi màu border */
+}
+
+.product-item h3 {
+color: var(--primary);
+font-size: 26px; /* To hơn */
+margin-bottom: 18px; /* Tăng margin */
+text-shadow: 0 0 5px rgba(0, 224, 255, 0.3);
+}
+
+.product-item p {
+color: var(--text-muted);
+font-size: 16px; /* To hơn */
+line-height: 1.7;
+flex-grow: 1;
+margin-bottom: 25px; /* Tăng margin */
+}
+
+.product-item .price {
+font-size: 24px; /* To hơn */
+font-weight: 700;
+color: var(--highlight);
+margin-bottom: 25px; /* Tăng margin */
+display: block;
+text-shadow: 0 0 5px rgba(255, 193, 7, 0.3);
+}
+
+.product-item button {
+width: 90%; /* Rộng hơn */
+padding: 14px 0; /* Tăng padding */
+font-size: 17px; /* To hơn */
+border-radius: 10px; /* Bo tròn hơn */
+}
+
+/* New: Download Page Styles */
+.download-page-content {
+text-align: center;
+padding: 60px 40px;
+background-color: var(--card-bg);
+border-radius: 15px;
+box-shadow: 0 8px 25px rgba(0, 0, 0, 0.6);
+width: 100%;
+display: flex;
+flex-direction: column;
+align-items: center;
+}
+
+.download-options {
+display: flex;
+flex-wrap: wrap;
+justify-content: center;
+gap: 35px; /* Tăng khoảng cách */
+margin-top: 40px;
+width: 100%;
+}
+
+.download-item {
+background-color: #1a1d29;
+border: 1px solid rgba(255, 193, 7, 0.25); /* Border rõ hơn */
+border-radius: 15px; /* Bo tròn hơn */
+padding: 30px; /* Tăng padding */
+flex: 1 1 calc(33% - 50px);
+max-width: 380px;
+text-align: center;
+box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+transition: transform 0.3s ease, box-shadow 0.3s ease,
+border-color 0.3s ease;
+display: flex;
+flex-direction: column;
+align-items: center;
+justify-content: space-between;
+}
+
+.download-item:hover {
+transform: translateY(-10px) scale(1.03);
+box-shadow: 0 12px 30px rgba(255, 193, 7, 0.5);
+border-color: var(--highlight);
+}
+
+.download-item i {
+font-size: 70px; /* To hơn */
+color: var(--primary);
+margin-bottom: 25px; /* Tăng margin */
+transition: color 0.3s ease, transform 0.3s ease, text-shadow 0.3s ease;
+text-shadow: 0 0 8px rgba(0, 224, 255, 0.3);
+}
+
+.download-item:hover i {
+color: var(--highlight);
+transform: scale(1.15); /* Phóng to hơn */
+text-shadow: 0 0 15px rgba(255, 193, 7, 0.6);
+}
+
+.download-item h3 {
+color: var(--text-light);
+font-size: 24px; /* To hơn */
+margin-bottom: 12px; /* Tăng margin */
+}
+
+.download-item p {
+color: var(--text-muted);
+font-size: 15px;
+line-height: 1.6;
+flex-grow: 1;
+margin-bottom: 30px; /* Tăng margin */
+}
+
+.download-item .btn-primary {
+width: 85%; /* Rộng hơn */
+padding: 12px 0; /* Tăng padding */
+font-size: 16px; /* To hơn */
+}
+
+.download-page-content .note {
+margin-top: 45px; /* Tăng margin */
+font-style: italic;
+color: var(--text-muted);
+font-size: 15px; /* To hơn */
+}
+
+/* Main content area for SPA transitions */
+#main-content-area {
+flex-grow: 1;
+display: flex;
+flex-direction: column;
+padding: 50px 30px; /* Tăng padding */
+opacity: 0;
+transform: translateY(30px);
+transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+box-sizing: border-box;
+align-items: center;
+justify-content: flex-start;
+width: 100%;
+}
+
+#main-content-area.active {
+opacity: 1;
+transform: translateY(0);
+}
+
+/* Đảm bảo các container con trong main-content-area cũng có chiều rộng tối đa */
+.hero,
+.section,
+.how-to-use-section,
+.products-page-content,
+.download-page-content,
+.account-center-container,
+.message-no-login {
+width: 100%;
+max-width: 1300px; /* Tăng chiều rộng tối đa cho nội dung chính */
+margin-left: auto;
+margin-right: auto;
+}
+
+/* Đối với .hero, nếu bạn muốn ảnh và text căn giữa riêng lẻ khi wrap */
+@media (max-width: 900px) {
+.hero {
+justify-content: center;
+}
+}
+
+.products-page-content,
+.download-page-content,
+.account-center-main-content {
+margin: 25px auto; /* Tăng margin auto để căn giữa */
+}
+
+/* Responsive Adjustments */
+@media (max-width: 900px) {
+.hero-text,
+.hero img,
+.how-to-use-steps,
+.how-to-use-image {
+max-width: 100%;
+text-align: center;
+margin-bottom: 25px;
+}
+
+.hero img {
+order: -1;
+}
+
+.hero-buttons {
+display: flex;
+justify-content: center;
+width: 100%;
+}
+
+.features {
+flex-direction: column;
+align-items: center;
+}
+
+.feature-box {
+width: 85%; /* Adjust width of feature boxes */
+max-width: 350px;
+}
+.how-to-use-content {
+flex-direction: column;
+align-items: center;
+}
+.how-to-use-steps {
+max-width: 100%;
+}
+.how-to-use-section h2 {
+text-align: center;
+}
+
+/* Account Info Responsive (no longer used for account-info-card, but for message-no-login) */
+.message-no-login {
+padding: 35px 30px;
+}
+.message-no-login h2 {
+font-size: 26px;
+}
+.message-no-login p {
+font-size: 16px;
+}
+
+/* Responsive for Account Center */
+@media (min-width: 900px) {
+.account-center-body {
+flex-direction: row;
+}
+.account-center-sidebar {
+border-bottom: none;
+border-right: 1px solid rgba(255, 255, 255, 0.08);
+}
+.info-grid {
+grid-template-columns: repeat(2, 1fr);
+}
+.info-item:nth-child(odd) {
+grid-column: 1;
+}
+.info-item:nth-child(even) {
+grid-column: 2;
+}
+}
+
+/* Responsive for Products/Download Pages */
+@media (max-width: 900px) {
+.product-item,
+.download-item {
+flex: 1 1 calc(50% - 25px); /* 2 cột trên màn hình trung bình */
+}
+}
+}
+
+@media (max-width: 768px) {
+/* Header */
+header {
+flex-direction: column;
+align-items: center;
+padding: 15px 20px;
+height: auto;
+overflow: visible;
+transition: padding 0.3s ease-in-out, height 0.3s ease-in-out,
+background-color 0.3s ease-in-out;
+}
+header h1 {
+margin-bottom: 15px;
+font-size: 28px; /* Giảm font */
+}
+nav {
+flex-wrap: wrap;
+margin-top: 15px;
+gap: 10px; /* Giảm khoảng cách giữa các nav link */
+justify-content: center;
+width: 100%;
+transform: translateY(0) !important;
+}
+nav a {
+padding: 8px 12px;
+font-size: 14px; /* Giảm kích thước font */
+}
+.search-box {
+width: 90%;
+margin-top: 15px;
+}
+.search-box input {
+width: 100%;
+padding: 10px 15px;
+}
+.lang-switcher,
+#login-btn {
+width: 90%;
+justify-content: center;
+margin-top: 15px;
+}
+#login-btn {
+padding: 12px 18px;
+font-size: 15px;
+}
+.account-link-wrapper .account-link-content {
+padding: 8px 12px;
+font-size: 14px;
+}
+.account-dropdown {
+min-width: 150px;
+}
+.account-dropdown a {
+padding: 10px 15px;
+font-size: 14px;
+gap: 10px;
+}
+
+/* Header khi cuộn xuống - CHỈ TRÊN MOBILE */
+header.scrolled {
+padding-top: 10px;
+padding-bottom: 10px;
+height: 60px;
+background-color: rgba(15, 17, 23, 0.9);
+box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+overflow: hidden;
+}
+
+header.scrolled h1 {
+transform: scale(0.9);
+margin-bottom: 0;
+}
+
+header.scrolled nav {
+transform: translateY(-120%);
+opacity: 0;
+pointer-events: none;
+}
+
+/* Đảm bảo các nút/input không bị ảnh hưởng bởi transform của nav khi ẩn */
+header.scrolled .search-box,
+header.scrolled .lang-switcher,
+header.scrolled #login-btn {
+opacity: 0;
+pointer-events: none;
+transform: translateY(-50px);
+}
+
+/* Hero Section */
+.hero {
+flex-direction: column;
+padding: 50px 25px;
+}
+.hero-text {
+max-width: 100%;
+text-align: center;
+margin-bottom: 30px;
+}
+.hero-text h2 {
+font-size: 36px;
+}
+.hero-text p {
+font-size: 17px;
+}
+.hero-buttons {
+flex-direction: column;
+gap: 12px; /* Tăng khoảng cách */
+margin-top: 25px;
+}
+.hero-buttons button {
+width: 90%;
+margin-right: 0;
+padding: 10px 20px;
+font-size: 16px;
+}
+
+/* Section chung */
+.section {
+padding: 50px 25px;
+}
+.section h2 {
+font-size: 30px;
+}
+.section p {
+font-size: 16px;
+}
+
+/* Features Section */
+.features {
+flex-direction: column;
+align-items: center;
+gap: 25px; /* Tăng khoảng cách */
+}
+.feature-box {
+width: 90%;
+max-width: 320px;
+padding: 22px;
+}
+.feature-box h3 {
+font-size: 20px;
+}
+.feature-box p {
+font-size: 14px;
+}
+
+/* How-to-Use Section */
+.how-to-use-section {
+padding: 50px 25px;
+}
+.how-to-use-section h2 {
+font-size: 30px;
+text-align: center;
+margin-bottom: 30px;
+}
+.how-to-use-content {
+flex-direction: column;
+gap: 35px;
+}
+.how-to-use-steps {
+max-width: 100%;
+min-width: unset;
+}
+.step-item {
+flex-direction: row;
+align-items: flex-start;
+text-align: left;
+padding: 18px;
+margin-bottom: 18px;
+}
+.step-number {
+font-size: 22px;
+width: 40px;
+height: 40px;
+}
+.step-text h3 {
+font-size: 20px;
+}
+.step-text p {
+font-size: 15px;
+}
+.how-to-use-image {
+max-width: 95%;
+min-width: unset;
+margin-top: 25px;
+}
+.social-links {
+margin-top: 25px;
+gap: 15px;
+}
+.social-links a {
+font-size: 30px;
+}
+.btn-contact {
+padding: 10px 20px;
+font-size: 15px;
+}
+
+/* Footer */
+.footer {
+padding: 35px 25px;
+font-size: 14px;
+}
+
+/* Account Info Responsive (message-no-login) */
+.message-no-login {
+padding: 35px 30px;
+}
+.message-no-login h2 {
+font-size: 26px;
+}
+.message-no-login p {
+font-size: 16px;
+}
+
+/* Account Center Responsive */
+.account-center-header h2 {
+font-size: 30px;
+}
+.account-center-header p {
+font-size: 16px;
+}
+.account-center-sidebar {
+min-width: unset;
+padding: 20px;
+border-right: none;
+border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+display: flex;
+flex-wrap: wrap;
+justify-content: center;
+gap: 10px;
+}
+.account-center-sidebar li {
+margin-bottom: 0;
+flex: 1 1 auto;
+min-width: 130px;
+}
+.account-center-sidebar button {
+padding: 12px 15px;
+font-size: 15px;
+justify-content: center;
+}
+.account-center-sidebar button i {
+font-size: 18px;
+}
+.account-center-content {
+padding: 30px 25px;
+}
+.account-center-content h3 {
+font-size: 24px;
+margin-bottom: 25px;
+}
+.info-grid {
+gap: 18px 25px;
+}
+.info-item label,
+.info-item p,
+.change-password-form label,
+.change-password-form input {
+font-size: 15px;
+}
+.change-password-form button {
+font-size: 16px;
+padding: 12px 0;
+}
+.transaction-history li {
+flex-direction: column;
+align-items: flex-start;
+gap: 8px;
+padding: 15px;
+}
+.transaction-history .transaction-amount {
+margin-top: 10px;
+align-self: flex-end;
+font-size: 18px;
+}
+
+/* Responsive for Products/Download Pages */
+@media (max-width: 768px) {
+.product-item,
+.download-item {
+flex: 1 1 calc(50% - 25px); /* 2 cột trên màn hình trung bình */
+}
+.products-page-content,
+.download-page-content {
+padding: 50px 25px;
+}
+}
+}
+
+@media (max-width: 480px) {
+/* Header */
+header {
+padding: 10px 15px;
+}
+header h1 {
+font-size: 24px;
+margin-bottom: 10px;
+}
+nav a {
+padding: 6px 10px;
+font-size: 13px;
+}
+.search-box,
+.lang-switcher,
+#login-btn {
+width: 100%;
+}
+#login-btn {
+padding: 10px 15px;
+font-size: 14px;
+}
+.account-link-wrapper .account-link-content {
+font-size: 13px;
+}
+.account-dropdown {
+min-width: unset;
+width: 100%;
+left: 50%;
+transform: translateX(-50%) translateY(-15px);
+}
+.account-dropdown.show {
+transform: translateX(-50%) translateY(0);
+}
+.account-dropdown a {
+padding: 10px 12px;
+}
+
+/* Hero Section */
+.hero {
+padding: 40px 18px;
+}
+.hero-text h2 {
+font-size: 32px;
+}
+.hero-text p {
+font-size: 15px;
+}
+.hero-buttons button {
+padding: 10px 20px;
+font-size: 15px;
+}
+.hero img {
+max-width: 100%;
+}
+
+/* Section chung */
+.section {
+padding: 40px 18px;
+}
+.section h2 {
+font-size: 26px;
+}
+.section p {
+font-size: 15px;
+}
+
+/* Features Section */
+.features {
+gap: 20px;
+}
+.feature-box {
+width: 100%;
+max-width: 300px;
+padding: 20px;
+}
+.feature-box h3 {
+font-size: 18px;
+}
+.feature-box p {
+font-size: 14px;
+}
+
+/* How-to-Use Section */
+.how-to-use-section {
+padding: 40px 18px;
+}
+.how-to-use-section h2 {
+font-size: 28px;
+}
+.step-item {
+flex-direction: column;
+align-items: center;
+text-align: center;
+gap: 10px;
+padding: 15px;
+}
+.step-number {
+margin-bottom: 5px;
+font-size: 20px;
+width: 35px;
+height: 35px;
+}
+.step-text h3 {
+font-size: 18px;
+}
+.step-text p {
+font-size: 14px;
+}
+.how-to-use-image {
+max-width: 100%;
+}
+.social-links {
+gap: 12px;
+}
+.social-links a {
+font-size: 28px;
+}
+.btn-contact {
+padding: 10px 20px;
+font-size: 15px;
+}
+
+/* Modal */
+.modal-content {
+padding: 25px;
+width: 95%;
+}
+.modal-content h3 {
+font-size: 24px;
+margin-bottom: 20px;
+}
+.modal-content label {
+font-size: 14px;
+margin-bottom: 6px;
+}
+.modal-content input {
+padding: 10px 12px;
+margin-bottom: 18px;
+font-size: 14px;
+}
+.modal-content button[type="submit"] {
+padding: 12px 0;
+font-size: 16px;
+}
+.form-switch-link {
+font-size: 13px;
+margin-top: 15px;
+}
+.error-message {
+font-size: 12px;
+margin-bottom: 15px;
+}
+
+/* Account Info Responsive (message-no-login) */
+.message-no-login {
+font-size: 18px;
+padding: 30px 20px;
+}
+.message-no-login h2 {
+font-size: 24px;
+}
+.message-no-login p {
+font-size: 15px;
+}
+
+/* Account Center Responsive */
+.account-center-header h2 {
+font-size: 26px;
+}
+.account-center-header p {
+font-size: 15px;
+}
+.account-center-sidebar button {
+font-size: 14px;
+padding: 10px 12px;
+}
+.account-center-sidebar button i {
+font-size: 16px;
+}
+.account-center-content {
+padding: 25px 20px;
+}
+.account-center-content h3 {
+font-size: 22px;
+margin-bottom: 20px;
+}
+.info-item label,
+.info-item p,
+.change-password-form label,
+.change-password-form input {
+font-size: 14px;
+}
+.change-password-form button {
+font-size: 15px;
+padding: 10px 0;
+}
+.transaction-history .transaction-details strong {
+font-size: 15px;
+}
+.transaction-history .transaction-details span {
+font-size: 13px;
+}
+.transaction-history .transaction-amount {
+font-size: 17px;
+}
+
+/* Responsive for Products/Download Pages */
+@media (max-width: 480px) {
+.product-item,
+.download-item {
+flex: 1 1 100%; /* Full width on smallest screens */
+padding: 25px;
+}
+.products-page-content,
+.download-page-content {
+padding: 40px 18px;
+}
+.product-item h3,
+.download-item h3 {
+font-size: 22px;
+}
+.product-item p,
+.download-item p {
+font-size: 14px;
+}
+.download-item i {
+font-size: 60px;
+}
+}
+
+/* CSS mới cho Canvas tuyết */
+#snow-canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none; /* Cho phép nhấp/tương tác đi xuyên qua canvas */
+  z-index: 9999; /* Đảm bảo nó nằm trên hầu hết mọi thứ, nhưng dưới các modal nếu cần */
+}
+</style>
+</head>
+<body>
+<div id="full-page-loader">
+<div class="progress-container">
+<div class="progress-bar" id="page-load-progress-bar"></div>
+</div>
+<span class="progress-text" id="page-load-progress-text">0%</span>
+</div>
+
+<header id="main-header">
+<h1>KrualX</h1>
+<nav>
+<a
+href="#"
+class="nav-link home-link"
+data-target-page="home"
+data-vi="Trang chủ"
+data-en="Home"
+><i class="fa-solid fa-house"></i> Trang chủ</a
+>
+<a
+href="https://www.facebook.com/Krual.me/?locale=vi_VN"
+target="_blank"
+class="nav-link"
+data-target-page="external"
+data-target-url="https://www.facebook.com/Krual.me/?locale=vi_VN"
+data-vi="Hỗ trợ"
+data-en="Support"
+><i class="fa-brands fa-facebook-messenger"></i> Hỗ trợ</a
+>
+<a
+href="#"
+class="nav-link auth-required"
+data-target-page="products"
+data-vi="Sản phẩm"
+data-en="Products"
+><i class="fa-solid fa-box"></i> Sản phẩm</a
+>
+<div class="account-link-wrapper" id="account-link-wrapper">
+<a
+href="#"
+data-vi="Tài khoản"
+data-en="Account"
+id="account-link"
+class="account-link-content"
+data-target-page="account-center"
+>
+<i class="fa-solid fa-user"></i> Tài khoản
+<i class="fa-solid fa-chevron-down"></i>
+</a>
+<div class="account-dropdown" id="account-dropdown"></div>
+</div>
+<a
+href="#"
+class="nav-link auth-required"
+data-target-page="download"
+data-vi="Tải xuống"
+data-en="Download"
+><i class="fa-solid fa-download"></i> Tải xuống</a
+>
+
+<div class="lang-switcher" role="group" aria-label="Chọn ngôn ngữ">
+<button id="btn-vi" class="active" aria-pressed="true" aria-label="Chọn tiếng Việt">
+VI
+</button>
+<button id="btn-en" aria-pressed="false" aria-label="Chọn tiếng Anh">EN</button>
+</div>
+
+<div class="search-box">
+<input type="text" placeholder="Tìm kiếm sản phẩm..." id="search-input" />
+</div>
+
+<a href="#" id="login-btn"
+><i class="fa-solid fa-arrow-right-to-bracket"></i> Đăng nhập</a
+>
+</nav>
+</header>
+
+<main id="main-content-area"></main>
+
+<footer class="footer animated-section">
+<p data-vi="© 2025 KrualX. Bảo lưu mọi quyền." data-en="© 2025 KrualX. All rights reserved.">
+© 2025 KrualX. Bảo lưu mọi quyền.
+</p>
+</footer>
+
+<canvas id="snow-canvas"></canvas>
+
+<div class="modal" id="auth-modal" aria-hidden="true" role="dialog" aria-labelledby="auth-title">
+<div class="modal-content" role="document">
+<span class="modal-close" id="auth-close" aria-label="Đóng">×</span>
+<h3
+id="auth-title"
+data-vi="Đăng nhập"
+data-en="Login"
+data-vi-register="Đăng ký tài khoản"
+data-en-register="Register Account"
+data-vi-forgot="Quên mật khẩu"
+data-en-forgot="Forgot Password"
+>
+Đăng nhập
+</h3>
+
+<form id="login-form" novalidate class="active-form">
+<label for="login-username" data-vi="Tên đăng nhập" data-en="Username"
+>Tên đăng nhập</label
+>
+<input type="text" id="login-username" name="username" autocomplete="username" required />
+<div class="error-message" id="login-username-error"></div>
+
+<label for="login-password" data-vi="Mật khẩu" data-en="Password">Mật khẩu</label>
+<input
+type="password"
+id="login-password"
+name="password"
+autocomplete="current-password"
+required
+/>
+<div class="error-message" id="login-password-error"></div>
+
+<button type="submit" data-vi="Đăng nhập" data-en="Login">Đăng nhập</button>
+<a
+href="#"
+class="form-switch-link"
+id="show-register"
+data-vi="Chưa có tài khoản? Đăng ký ngay!"
+data-en="Don't have an account? Register now!"
+>Chưa có tài khoản? Đăng ký ngay!</a
+>
+<a
+href="#"
+class="form-switch-link"
+id="show-forgot-password"
+data-vi="Quên mật khẩu?"
+data-en="Forgot password?"
+>Quên mật khẩu?</a
+>
+</form>
+
+<form id="register-form" novalidate>
+<label for="register-username" data-vi="Tên đăng nhập" data-en="Username"
+>Tên đăng nhập</label
+>
+<input type="text" id="register-username" name="username" autocomplete="new-username" required />
+<div class="error-message" id="register-username-error"></div>
+
+<label for="register-password" data-vi="Mật khẩu" data-en="Password">Mật khẩu</label>
+<input type="password" id="register-password" name="password" autocomplete="new-password" required />
+<div class="error-message" id="register-password-error"></div>
+
+<label for="register-confirm-password" data-vi="Xác nhận mật khẩu" data-en="Confirm Password"
+>Xác nhận mật khẩu</label
+>
+<input type="password" id="register-confirm-password" name="confirmPassword" required />
+<div class="error-message" id="register-confirm-password-error"></div>
+
+<button type="submit" data-vi="Đăng ký" data-en="Register">Đăng ký</button>
+<a
+href="#"
+class="form-switch-link"
+id="show-login"
+data-vi="Đã có tài khoản? Đăng nhập!"
+data-en="Already have an account? Login!"
+>Đã có tài khoản? Đăng nhập!</a
+>
+</form>
+
+<form id="forgot-password-form" novalidate>
+<label for="forgot-username" data-vi="Tên đăng nhập" data-en="Username"
+>Tên đăng nhập</label
+>
+<input type="text" id="forgot-username" name="username" autocomplete="username" required />
+<div class="error-message" id="forgot-username-error"></div>
+
+<button type="submit" data-vi="Đặt lại mật khẩu" data-en="Reset Password">
+Đặt lại mật khẩu
+</button>
+<a
+href="#"
+class="form-switch-link"
+id="show-login-from-forgot"
+data-vi="Quay lại Đăng nhập"
+data-en="Back to Login"
+>Quay lại Đăng nhập</a
+>
+</form>
+</div>
+</div>
+
+<div id="toast-container"></div>
+
+<script>
+// Language switcher
+const btnVi = document.getElementById("btn-vi");
+const btnEn = document.getElementById("btn-en");
+const elements = document.querySelectorAll("[data-en][data-vi]");
+const mainContentArea = document.getElementById("main-content-area"); // Main content area
+
+// Page state (to know which page is currently displayed)
+let currentPage = "home"; // 'home', 'account-info', 'account-center', 'products', 'download'
+
+function setLanguage(lang) {
+elements.forEach((el) => {
+// Đảm bảo không thay đổi nội dung của icon
+const icons = el.querySelectorAll("i");
+if (icons.length > 0) {
+// Lấy text node đầu tiên hoặc node text cuối cùng để cập nhật
+let textNode = Array.from(el.childNodes).find(
+(node) => node.nodeType === Node.TEXT_NODE && node.nodeValue.trim().length > 0
+);
+if (textNode) {
+textNode.nodeValue = ` ${el.getAttribute(`data-${lang}`)} `; // Cập nhật text node và thêm khoảng trắng
+} else {
+// Nếu không có text node, có thể do cấu trúc HTML đã thay đổi
+// console.warn('Không tìm thấy text node để cập nhật ngôn ngữ cho:', el);
+}
+} else {
+el.innerHTML = el.getAttribute(`data-${lang}`);
+}
+});
+// Cập nhật lại tiêu đề modal khi chuyển ngôn ngữ
+const authTitle = document.getElementById("auth-title");
+if (authTitle) {
+// Xác định tiêu đề phù hợp dựa trên form đang hiển thị
+if (loginForm.classList.contains("active-form")) {
+authTitle.innerHTML = authTitle.getAttribute(
+`data-${btnVi.classList.contains("active") ? "vi" : "en"}`
+);
+} else if (registerForm.classList.contains("active-form")) {
+// register form active
+authTitle.innerHTML = authTitle.getAttribute(
+`data-${btnVi.classList.contains("active") ? "vi" : "en"}` + "-register"
+);
+} else if (forgotPasswordForm.classList.contains("active-form")) {
+authTitle.innerHTML = authTitle.getAttribute(
+`data-${btnVi.classList.contains("active") ? "vi" : "en"}` + "-forgot"
+);
+}
+}
+// Cập nhật placeholder cho search input
+const searchInput = document.getElementById("search-input");
+if (searchInput) {
+if (lang === "vi") {
+searchInput.placeholder = "Tìm kiếm sản phẩm...";
+} else {
+searchInput.placeholder = "Search products...";
+}
+}
+
+// Update the "Contact Support" button in the new section
+const contactBtn = document.querySelector(".btn-contact");
+if (contactBtn) {
+const icon = contactBtn.querySelector("i");
+contactBtn.innerHTML = "";
+if (icon) contactBtn.appendChild(icon);
+contactBtn.innerHTML += ` ${contactBtn.getAttribute(`data-${lang}`)}`;
+}
+
+// --- Optimized Language Switcher Logic ---
+const langSwitcherContainer = document.querySelector(".lang-switcher"); // Get the parent container
+
+if (lang === "vi") {
+btnVi.classList.add("active");
+btnVi.setAttribute("aria-pressed", "true");
+btnEn.classList.remove("active");
+btnEn.setAttribute("aria-pressed", "false");
+langSwitcherContainer.classList.remove("en"); // Remove 'en' class to move indicator to 'vi'
+} else {
+btnEn.classList.add("active");
+btnEn.setAttribute("aria-pressed", "true");
+btnVi.classList.remove("active");
+btnVi.setAttribute("aria-pressed", "false");
+langSwitcherContainer.classList.add("en"); // Add 'en' class to move indicator to 'en'
+}
+// --- End Optimized Language Switcher Logic ---
+
+// Render current page again to update language
+// KHÔNG SỬ DỤNG LOADER KHI CHUYỂN NGÔN NGỮ NỮA
+if (currentPage === "home") {
+renderHomePage(false); // Thêm tham số false để không hiển thị loader
+} else if (currentPage === "account-center") {
+renderAccountCenterPage(false); // Thêm tham số false để không hiển thị loader
+} else if (currentPage === "products") {
+renderProductsPage(false); // Thêm tham số false để không hiển thị loader
+} else if (currentPage === "download") {
+renderDownloadPage(false); // Thêm tham số false để không hiển thị loader
+}
+updateHeaderForAuth(); // Cập nhật lại text của nút login/logout khi chuyển ngôn ngữ
+updateActiveNavLink(); // Cập nhật lại highlight cho nav link
+}
+
+btnVi.addEventListener("click", () => {
+setLanguage("vi");
+localStorage.setItem("currentLang", "vi");
+});
+btnEn.addEventListener("click", () => {
+setLanguage("en");
+localStorage.setItem("currentLang", "en");
+});
+
+// --- Login/Register Modal Logic ---
+const authModal = document.getElementById("auth-modal");
+const authClose = document.getElementById("auth-close");
+const authTitle = document.getElementById("auth-title"); // Tiêu đề modal
+const loginForm = document.getElementById("login-form");
+const registerForm = document.getElementById("register-form");
+const forgotPasswordForm = document.getElementById("forgot-password-form"); // Thêm form quên mật khẩu
+const showRegisterLink = document.getElementById("show-register");
+const showLoginLink = document.getElementById("show-login");
+const showForgotPasswordLink = document.getElementById("show-forgot-password"); // Link quên mật khẩu
+const showLoginFromForgotLink = document.getElementById(
+"show-login-from-forgot"
+); // Link quay lại login từ quên mật khẩu
+const loginBtn = document.getElementById("login-btn"); // Nút Đăng nhập trên header (riêng biệt)
+
+// THÊM BIẾN MỚI CHO CÁC INPUT VÀ THÔNG BÁO LỖI
+const loginUsernameInput = document.getElementById("login-username");
+const loginPasswordInput = document.getElementById("login-password");
+const loginUsernameError = document.getElementById("login-username-error");
+const loginPasswordError = document.getElementById("login-password-error");
+
+const registerUsernameInput = document.getElementById("register-username");
+const registerPasswordInput = document.getElementById("register-password");
+const registerConfirmPasswordInput = document.getElementById(
+"register-confirm-password"
+);
+const registerUsernameError = document.getElementById("register-username-error");
+const registerPasswordError = document.getElementById("register-password-error");
+const registerConfirmPasswordError = document.getElementById(
+"register-confirm-password-error"
+);
+
+const forgotUsernameInput = document.getElementById("forgot-username"); // Input form quên mật khẩu
+const forgotUsernameError = document.getElementById("forgot-username-error"); // Error form quên mật khẩu
+
+// Account Dropdown Elements
+const accountLinkWrapper = document.getElementById("account-link-wrapper");
+const accountLink = document.getElementById("account-link"); // Liên kết Tài khoản
+const accountDropdown = document.getElementById("account-dropdown");
+// const dropdownLoginBtn = document.getElementById("dropdown-login-btn"); // Sẽ được tạo động
+
+// Các liên kết cần yêu cầu đăng nhập
+const authRequiredLinks = document.querySelectorAll(".nav-link.auth-required");
+const homeLink = document.querySelector(".home-link");
+
+// Full Page Loader
+const fullPageLoader = document.getElementById("full-page-loader");
+const progressBar = document.getElementById("page-load-progress-bar");
+const progressText = document.getElementById("page-load-progress-text");
+let currentProgressInterval; // Biến để lưu trữ ID của interval
+
+function showFullPageLoader(duration = 1000) {
+// Thêm duration (thời gian mô phỏng tải)
+progressBar.style.width = "0%";
+progressText.textContent = "0%";
+fullPageLoader.classList.add("show");
+document.body.style.overflow = "hidden";
+
+let progress = 0;
+const increment = 100 / (duration / 50); // Cứ 50ms tăng 1 lần, tổng thời gian duration
+const delay = 50;
+
+currentProgressInterval = setInterval(() => {
+progress += increment;
+if (progress >= 100) {
+progress = 100;
+clearInterval(currentProgressInterval); // Dừng khi đạt 100%
+}
+progressBar.style.width = `${Math.floor(progress)}%`;
+progressText.textContent = `${Math.floor(progress)}%`;
+}, delay);
+}
+
+function hideFullPageLoader() {
+clearInterval(currentProgressInterval); // Đảm bảo dừng interval nếu đang chạy
+progressBar.style.width = "100%"; // Đặt lại 100% khi ẩn để đảm bảo hoàn tất
+
+// Thêm một độ trễ nhỏ để người dùng nhìn thấy 100% trước khi ẩn
+setTimeout(() => {
+fullPageLoader.classList.remove("show");
+document.body.style.overflow = "";
+progressText.textContent = "100%"; // Đảm bảo text luôn là 100% khi ẩn
+}, 200); // Ẩn sau 200ms
+}
+
+// Lưu trữ tài khoản (ví dụ đơn giản với localStorage)
+// Thay đổi users để lưu trữ đối tượng người dùng
+// THÊM EMAIL, SỐ ĐIỆN THOẠI, GIỚI TÍNH VÀ MỘT SỐ GIAO DỊCH MẪU VÀO USER DATA
+let users = JSON.parse(localStorage.getItem("cax_users")) || {
+testuser: {
+password: "password123",
+registrationDate: "2024-01-01",
+email: "test@example.com",
+phone: "+84 912 345 678",
+gender: "male",
+transactions: [
+{ id: "TXN001", type: "Mua sản phẩm X", amount: -150000, date: "2025-05-20" },
+{ id: "TXN002", type: "Nạp tiền", amount: 500000, date: "2025-05-18" },
+{ id: "TXN003", type: "Rút tiền", amount: -100000, date: "2025-05-15" },
+{ id: "TXN004", type: "Đăng ký gói Premium", amount: -200000, date: "2025-05-10" },
+],
+},
+krualx: {
+password: "123",
+registrationDate: "2024-03-10",
+email: "krualx@dev.com",
+phone: "+84 987 654 321",
+gender: "undefined",
+transactions: [
+{ id: "TXN005", type: "Mua sản phẩm Y", amount: -50000, date: "2025-05-22" },
+{ id: "TXN006", type: "Nạp tiền", amount: 200000, date: "2025-05-21" },
+],
+},
+};
+let currentUser = localStorage.getItem("cax_currentUser");
+
+function saveUsers() {
+localStorage.setItem("cax_users", JSON.stringify(users));
+}
+
+function saveCurrentUser(username) {
+localStorage.setItem("cax_currentUser", username);
+currentUser = username;
+updateHeaderForAuth(); // Cập nhật trạng thái header
+accountDropdown.classList.remove("show"); // Ẩn dropdown sau khi đăng nhập
+}
+
+function clearCurrentUser() {
+localStorage.removeItem("cax_currentUser");
+currentUser = null;
+updateHeaderForAuth(); // Cập nhật trạng thái header
+}
+
+// Khai báo biến mới cho toast và form submit buttons
+const loginSubmitBtn = loginForm.querySelector('button[type="submit"]');
+const registerSubmitBtn = registerForm.querySelector('button[type="submit"]');
+const forgotPasswordSubmitBtn = forgotPasswordForm.querySelector(
+'button[type="submit"]'
+); // Nút submit form quên mật khẩu
+
+let toastIdCounter = 0; // Dùng để tạo ID duy nhất cho mỗi toast
+
+// HÀM HỖ TRỢ HIỂN THỊ LỖI (CẬP NHẬT)
+function showError(element, message, inputElement = null) {
+element.textContent = message;
+element.classList.add("show");
+element.setAttribute("aria-live", "polite"); // Để trình đọc màn hình nhận diện
+
+if (inputElement) {
+inputElement.classList.add("error"); // Thêm class 'error' vào input
+inputElement.setAttribute("aria-invalid", "true");
+}
+}
+
+function clearError(element, inputElement = null) {
+element.textContent = "";
+element.classList.remove("show");
+element.removeAttribute("aria-live");
+
+if (inputElement) {
+inputElement.classList.remove("error"); // Xóa class 'error' khỏi input
+inputElement.removeAttribute("aria-invalid");
+}
+}
+
+function clearAllErrors() {
+clearError(loginUsernameError, loginUsernameInput);
+clearError(loginPasswordError, loginPasswordInput);
+clearError(registerUsernameError, registerUsernameInput);
+clearError(registerPasswordError, registerPasswordInput);
+clearError(registerConfirmPasswordError, registerConfirmPasswordInput);
+clearError(forgotUsernameError, forgotUsernameInput); // Thêm dòng này
+
+// Clear errors for change password form if it's active
+const changePassForm = document.getElementById("change-password-form");
+if (changePassForm) {
+clearError(
+changePassForm.querySelector("#old-password-error"),
+changePassForm.querySelector("#old-password")
+);
+clearError(
+changePassForm.querySelector("#new-password-error"),
+changePassForm.querySelector("#new-password")
+);
+clearError(
+changePassForm.querySelector("#confirm-new-password-error"),
+changePassForm.querySelector("#confirm-new-password")
+);
+}
+}
+
+// CẬP NHẬT HÀM showForm() (Đảm bảo reset input error class)
+function showForm(formId) {
+loginForm.classList.remove("active-form");
+registerForm.classList.remove("active-form");
+forgotPasswordForm.classList.remove("active-form"); // Thêm dòng này
+clearAllErrors(); // Xóa tất cả lỗi khi chuyển form
+
+// Reset input states
+loginUsernameInput.classList.remove("error");
+loginPasswordInput.classList.remove("error");
+registerUsernameInput.classList.remove("error");
+registerPasswordInput.classList.remove("error");
+registerConfirmPasswordInput.classList.remove("error");
+forgotUsernameInput.classList.remove("error"); // Thêm dòng này
+
+if (formId === "login") {
+loginForm.classList.add("active-form");
+authTitle.innerHTML = authTitle.getAttribute(
+`data-${btnVi.classList.contains("active") ? "vi" : "en"}`
+);
+loginUsernameInput.focus();
+} else if (formId === "register") {
+registerForm.classList.add("active-form");
+authTitle.innerHTML = authTitle.getAttribute(
+`data-${btnVi.classList.contains("active") ? "vi" : "en"}` + "-register"
+);
+registerUsernameInput.focus();
+} else if (formId === "forgot-password") {
+// Thêm trường hợp này
+forgotPasswordForm.classList.add("active-form");
+authTitle.innerHTML = authTitle.getAttribute(
+`data-${btnVi.classList.contains("active") ? "vi" : "en"}` + "-forgot"
+); // Cần thêm data-vi-forgot và data-en-forgot
+forgotUsernameInput.focus();
+}
+}
+
+// HÀM CHO TOAST NOTIFICATIONS
+function showToast(message, type = "info", duration = 3000) {
+const toastContainer = document.getElementById("toast-container");
+if (!toastContainer) {
+console.error(
+"Toast container not found. Please add <div id='toast-container'></div> to your HTML."
+);
+// Fallback to alert if container not found
+alert(message);
+return;
+}
+
+const toast = document.createElement("div");
+toast.classList.add("toast", type);
+toast.setAttribute("role", "alert");
+toast.setAttribute("aria-live", "assertive");
+toast.setAttribute("id", `toast-${toastIdCounter++}`);
+
+let iconClass = "";
+if (type === "success") {
+iconClass = "fa-check-circle";
+} else if (type === "error") {
+iconClass = "fa-exclamation-circle";
+} else {
+iconClass = "fa-info-circle";
+}
+
+toast.innerHTML = `<i class="fas ${iconClass}"></i><span>${message}</span>`;
+toastContainer.appendChild(toast);
+
+// Force reflow for transition
+void toast.offsetWidth;
+
+toast.classList.add("show");
+
+setTimeout(() => {
+toast.classList.add("hide");
+toast.addEventListener(
+"transitionend",
+() => {
+toast.remove();
+},
+{ once: true }
+);
+}, duration);
+}
+
+// HÀM QUẢN LÝ TRẠNG THÁI LOADING CHO FORM VÀ NÚT
+function setFormProcessing(isProcessing, formElement, submitButton) {
+if (isProcessing) {
+formElement.classList.add("processing");
+submitButton.classList.add("loading");
+submitButton.disabled = true; // Vô hiệu hóa nút
+} else {
+formElement.classList.remove("processing");
+submitButton.classList.remove("loading");
+submitButton.disabled = false; // Kích hoạt lại nút
+}
+}
+
+let lastFocusedElement = null; // Biến để lưu trữ phần tử được focus trước khi modal mở
+
+// CẬP NHẬT: Xử lý Đăng xuất từ nút chính (loginBtn)
+loginBtn.addEventListener("click", (e) => {
+e.preventDefault();
+if (currentUser) {
+if (
+confirm(
+btnVi.classList.contains("active")
+? "Bạn có muốn đăng xuất không?"
+: "Do you want to log out?"
+)
+) {
+clearCurrentUser();
+showToast(
+btnVi.classList.contains("active")
+? "Bạn đã đăng xuất thành công."
+: "You have been logged out successfully.",
+"info"
+);
+renderHomePage(false); // Không hiển thị loader khi đăng xuất
+}
+} else {
+lastFocusedElement = e.currentTarget; // Lưu lại nút "Đăng nhập"
+authModal.classList.add("active");
+authModal.setAttribute("aria-hidden", "false");
+showForm("login");
+// Đặt tiêu điểm ngay sau khi modal hiển thị
+setTimeout(() => {
+loginUsernameInput.focus();
+authModal.querySelector(".modal-content").focus(); // Đặt tiêu điểm cho modal content để bắt đầu bẫy focus
+}, 350); // Chờ modal có thời gian xuất hiện
+}
+});
+
+// Xử lý click vào liên kết "Tài khoản"
+// Cập nhật để accountLink cũng điều hướng tới account-center-page
+accountLink.addEventListener("click", (e) => {
+e.preventDefault();
+if (currentUser) {
+accountDropdown.classList.toggle("show");
+} else {
+lastFocusedElement = e.currentTarget; // Lưu lại nút "Tài khoản"
+// Nếu chưa đăng nhập, mở modal login
+authModal.classList.add("active");
+authModal.setAttribute("aria-hidden", "false");
+showForm("login");
+setTimeout(() => {
+loginUsernameInput.focus();
+authModal.querySelector(".modal-content").focus();
+}, 350);
+}
+});
+
+// Ẩn dropdown khi click ra ngoài
+document.addEventListener("click", (e) => {
+if (
+!accountLinkWrapper.contains(e.target) &&
+!accountDropdown.contains(e.target)
+) {
+accountDropdown.classList.remove("show");
+}
+});
+
+authClose.addEventListener("click", () => {
+authModal.classList.remove("active");
+authModal.setAttribute("aria-hidden", "true");
+clearAllErrors(); // Xóa lỗi khi đóng modal
+loginForm.reset();
+registerForm.reset();
+forgotPasswordForm.reset(); // Reset form quên mật khẩu
+
+// Trả lại tiêu điểm về phần tử đã kích hoạt modal
+if (lastFocusedElement) {
+lastFocusedElement.focus();
+lastFocusedElement = null; // Xóa tham chiếu
+}
+});
+
+authModal.addEventListener("click", (e) => {
+if (e.target === authModal) {
+authModal.classList.remove("active");
+authModal.setAttribute("aria-hidden", "true");
+clearAllErrors(); // Xóa lỗi khi đóng modal
+loginForm.reset();
+registerForm.reset();
+forgotPasswordForm.reset(); // Reset form quên mật khẩu
+
+// Trả lại tiêu điểm
+if (lastFocusedElement) {
+lastFocusedElement.focus();
+lastFocusedElement = null;
+}
+}
+});
+
+// Chuyển đổi giữa Đăng nhập và Đăng ký
+showRegisterLink.addEventListener("click", (e) => {
+e.preventDefault();
+showForm("register");
+});
+
+showLoginLink.addEventListener("click", (e) => {
+e.preventDefault();
+showForm("login");
+});
+
+// Xử lý chuyển sang form quên mật khẩu
+showForgotPasswordLink.addEventListener("click", (e) => {
+e.preventDefault();
+showForm("forgot-password");
+});
+
+// Xử lý quay lại form đăng nhập từ form quên mật khẩu
+showLoginFromForgotLink.addEventListener("click", (e) => {
+e.preventDefault();
+showForm("login");
+});
+
+// Xử lý Đăng nhập
+loginForm.addEventListener("submit", async (e) => {
+// Thêm async
+e.preventDefault();
+clearAllErrors(); // Xóa lỗi cũ trước khi kiểm tra lại
+
+const username = loginUsernameInput.value.trim();
+const password = loginPasswordInput.value.trim();
+let isValid = true;
+
+if (!username) {
+showError(
+loginUsernameError,
+btnVi.classList.contains("active")
+? "Vui lòng nhập tên đăng nhập."
+: "Please enter your username.",
+loginUsernameInput
+);
+isValid = false;
+}
+if (!password) {
+showError(
+loginPasswordError,
+btnVi.classList.contains("active")
+? "Vui lòng nhập mật khẩu."
+: "Please enter your password.",
+loginPasswordInput
+);
+isValid = false;
+}
+
+if (!isValid) return; // Dừng nếu có lỗi nhập liệu
+
+setFormProcessing(true, authModal.querySelector(".modal-content"), loginSubmitBtn); // Bật trạng thái loading
+
+// Mô phỏng quá trình xử lý trên server (ví dụ: 1-2 giây)
+await new Promise((resolve) => setTimeout(resolve, 1500));
+
+// Cần kiểm tra userData.password thay vì users[username] trực tiếp
+const userData = users[username];
+if (userData && userData.password === password) {
+saveCurrentUser(username);
+showToast(
+(btnVi.classList.contains("active") ? "Đăng nhập thành công! Chào mừng, " : "Login successful! Welcome, ") +
+username +
+"!",
+"success"
+);
+authModal.classList.remove("active");
+authModal.setAttribute("aria-hidden", "true");
+loginForm.reset();
+renderHomePage(false); // Không hiển thị loader khi đăng nhập
+} else {
+showError(
+loginUsernameError,
+btnVi.classList.contains("active")
+? "Tên đăng nhập hoặc mật khẩu không đúng."
+: "Incorrect username or password.",
+loginUsernameInput
+);
+if (password) {
+showError(
+loginPasswordError,
+btnVi.classList.contains("active") ? "Mật khẩu không đúng." : "Incorrect password.",
+loginPasswordInput
+);
+}
+showToast(
+btnVi.classList.contains("active")
+? "Đăng nhập thất bại. Vui lòng kiểm tra lại."
+: "Login failed. Please check your credentials.",
+"error"
+);
+}
+setFormProcessing(false, authModal.querySelector(".modal-content"), loginSubmitBtn); // Tắt trạng thái loading
+});
+
+// Xử lý Đăng ký
+registerForm.addEventListener("submit", async (e) => {
+// Thêm async
+e.preventDefault();
+clearAllErrors(); // Xóa lỗi cũ trước khi kiểm tra lại
+
+const username = registerUsernameInput.value.trim();
+const password = registerPasswordInput.value.trim();
+const confirmPassword = registerConfirmPasswordInput.value.trim();
+let isValid = true;
+
+if (!username) {
+showError(
+registerUsernameError,
+btnVi.classList.contains("active") ? "Vui lòng nhập tên đăng nhập." : "Please enter a username.",
+registerUsernameInput
+);
+isValid = false;
+} else if (users[username]) {
+showError(
+registerUsernameError,
+(btnVi.classList.contains("active") ? "Tên đăng nhập '" : "Username '") +
+username +
+(btnVi.classList.contains("active")
+? "' đã tồn tại. Vui lòng chọn tên khác."
+: "' already exists. Please choose another username."),
+registerUsernameInput
+);
+isValid = false;
+}
+
+if (!password) {
+showError(
+registerPasswordError,
+btnVi.classList.contains("active") ? "Vui lòng nhập mật khẩu." : "Please enter a password.",
+registerPasswordInput
+);
+isValid = false;
+} else if (password.length < 6) {
+// Ví dụ: mật khẩu phải ít nhất 6 ký tự
+showError(
+registerPasswordError,
+btnVi.classList.contains("active") ? "Mật khẩu phải có ít nhất 6 ký tự." : "Password must be at least 6 characters.",
+registerPasswordInput
+);
+isValid = false;
+}
+
+if (!confirmPassword) {
+showError(
+registerConfirmPasswordError,
+btnVi.classList.contains("active") ? "Vui lòng xác nhận mật khẩu." : "Please confirm your password.",
+registerConfirmPasswordInput
+);
+isValid = false;
+} else if (password !== confirmPassword) {
+showError(
+registerConfirmPasswordError,
+btnVi.classList.contains("active") ? "Mật khẩu xác nhận không khớp." : "Confirm password does not match.",
+registerConfirmPasswordInput
+);
+isValid = false;
+}
+
+if (!isValid) return; // Dừng nếu có lỗi nhập liệu
+
+setFormProcessing(true, authModal.querySelector(".modal-content"), registerSubmitBtn); // Bật trạng thái loading
+await new Promise((resolve) => setTimeout(resolve, 1500)); // Mô phỏng xử lý
+
+// Lưu đối tượng người dùng với ngày đăng ký, email, phone và gender mặc định
+users[username] = {
+password: password,
+registrationDate: new Date().toISOString().slice(0, 10), // Lưu dưới dạngYYYY-MM-DD
+email: `${username}@example.com`, // Email mặc định
+phone: '', // Thêm trường số điện thoại mặc định
+gender: 'undefined', // Thêm trường giới tính mặc định
+transactions: [], // Khởi tạo danh sách giao dịch rỗng
+};
+saveUsers();
+saveCurrentUser(username);
+showToast(
+(btnVi.classList.contains("active") ? "Đăng ký thành công! Chào mừng, " : "Registration successful! Welcome, ") +
+username +
+"!",
+"success"
+);
+authModal.classList.remove("active");
+authModal.setAttribute("aria-hidden", "true");
+registerForm.reset();
+showForm("login"); // Quay lại form đăng nhập sau khi đăng ký thành công
+renderHomePage(false); // Không hiển thị loader khi đăng ký
+setFormProcessing(false, authModal.querySelector(".modal-content"), registerSubmitBtn); // Tắt trạng thái loading
+});
+
+// Xử lý Quên mật khẩu
+forgotPasswordForm.addEventListener("submit", async (e) => {
+e.preventDefault();
+clearError(forgotUsernameError, forgotUsernameInput);
+
+const username = forgotUsernameInput.value.trim();
+let isValid = true;
+
+if (!username) {
+showError(
+forgotUsernameError,
+btnVi.classList.contains("active") ? "Vui lòng nhập tên đăng nhập." : "Please enter your username.",
+forgotUsernameInput
+);
+isValid = false;
+}
+
+if (!isValid) return;
+
+setFormProcessing(
+true,
+authModal.querySelector(".modal-content"),
+forgotPasswordSubmitBtn
+);
+await new Promise((resolve) => setTimeout(resolve, 2000)); // Mô phỏng gửi email/xử lý
+
+if (users[username]) {
+showToast(
+(btnVi.classList.contains("active")
+? "Yêu cầu đặt lại mật khẩu đã được gửi cho tài khoản "
+: "Password reset request sent for account ") +
+username +
+(btnVi.classList.contains("active")
+? ". (Đây là bản demo, không có email thật được gửi)."
+: ". (This is a demo, no actual email sent)."),
+"info",
+5000
+);
+authModal.classList.remove("active");
+authModal.setAttribute("aria-hidden", "true");
+forgotPasswordForm.reset();
+showForm("login"); // Quay lại form đăng nhập
+} else {
+showError(
+forgotUsernameError,
+btnVi.classList.contains("active") ? "Tên đăng nhập không tồn tại." : "Username does not exist.",
+forgotUsernameInput
+);
+showToast(
+btnVi.classList.contains("active") ? "Không tìm thấy tài khoản." : "Account not found.",
+"error"
+);
+}
+setFormProcessing(
+false,
+authModal.querySelector(".modal-content"),
+forgotPasswordSubmitBtn
+);
+});
+
+// Cập nhật trạng thái header (nút đăng nhập/tên người dùng)
+function updateHeaderForAuth() {
+const currentLang = btnVi.classList.contains("active") ? "vi" : "en";
+
+// Luôn cập nhật text của nút login/logout
+if (currentUser) {
+loginBtn.innerHTML = `<i class="fa-solid fa-right-from-bracket"></i> ${
+currentLang === "vi" ? "Đăng xuất (" : "Logout ("
+}${currentUser})`;
+loginBtn.classList.add("logged-in");
+} else {
+loginBtn.innerHTML = `<i class="fa-solid fa-arrow-right-to-bracket"></i> ${
+currentLang === "vi" ? "Đăng nhập" : "Login"
+}`;
+loginBtn.classList.remove("logged-in");
+}
+
+// Quản lý hiển thị của nút "Đăng nhập" và "Tài khoản"
+if (currentUser) {
+// Nếu đã đăng nhập:
+loginBtn.style.display = "none"; // Ẩn nút Đăng nhập chính
+accountLinkWrapper.style.display = "flex"; // Hiển thị liên kết "Tài khoản"
+
+const accountLinkContent = accountLink.querySelector(".account-link-content") || accountLink;
+accountLinkContent.innerHTML = `<i class="fa-solid fa-user"></i> ${accountLink.getAttribute(
+`data-${currentLang}`
+)} <i class="fa-solid fa-chevron-down"></i>`;
+
+// Cập nhật dropdown cho trạng thái đăng nhập
+accountDropdown.innerHTML = `
+<a href="#" id="dropdown-account-center" data-target-page="account-center" data-vi="Trung tâm tài khoản" data-en="Account Center">
+<i class="fa-solid fa-gauge-high"></i> ${currentLang === "vi" ? "Trung tâm tài khoản" : "Account Center"}
+</a>
+<a href="#" id="dropdown-logout-btn" data-vi="Đăng xuất" data-en="Logout">
+<i class="fa-solid fa-right-from-bracket"></i> ${currentLang === "vi" ? "Đăng xuất" : "Logout"}
+</a>
+`;
+// Thêm listener cho nút đăng xuất trong dropdown (phải tạo lại vì innerHTML thay đổi)
+document.getElementById("dropdown-logout-btn").addEventListener("click", (e) => {
+e.preventDefault();
+if (
+confirm(
+currentLang === "vi" ? "Bạn có muốn đăng xuất không?" : "Do you want to log out?"
+)
+) {
+clearCurrentUser();
+showToast(
+currentLang === "vi" ? "Bạn đã đăng xuất thành công." : "You have been logged out successfully.",
+"info"
+);
+renderHomePage(false); // Không hiển thị loader khi đăng xuất từ dropdown
+}
+});
+// Listener cho trung tâm tài khoản
+document.getElementById("dropdown-account-center").addEventListener("click", (e) => {
+e.preventDefault();
+accountDropdown.classList.remove("show"); // Ẩn dropdown
+renderAccountCenterPage(false); // Không hiển thị loader khi chuyển trang
+});
+
+accountDropdown.classList.remove("show"); // Đảm bảo dropdown ẩn khi đăng nhập
+} else {
+// Nếu chưa đăng nhập:
+loginBtn.style.display = "flex"; // Hiển thị nút Đăng nhập chính
+accountLinkWrapper.style.display = "none"; // Ẩn liên kết "Tài khoản"
+
+// Cập nhật dropdown cho trạng thái chưa đăng nhập
+accountDropdown.innerHTML = `
+<a href="#" id="dropdown-login-btn" data-vi="Đăng nhập" data-en="Login">
+<i class="fa-solid fa-arrow-right-to-bracket"></i> ${currentLang === "vi" ? "Đăng nhập" : "Login"}
+</a>
+`;
+// Thêm listener cho nút đăng nhập trong dropdown (phải tạo lại)
+const newDropdownLoginBtn = document.getElementById("dropdown-login-btn");
+if (newDropdownLoginBtn) {
+newDropdownLoginBtn.addEventListener("click", (e) => {
+e.preventDefault();
+accountDropdown.classList.remove("show"); // Ẩn dropdown
+authModal.classList.add("active");
+authModal.setAttribute("aria-hidden", "false");
+showForm("login");
+});
+}
+}
+}
+
+// Hàm để cập nhật lớp 'active-nav-link' trên các liên kết điều hướng
+function updateActiveNavLink() {
+document.querySelectorAll(".nav-link").forEach((link) => {
+const targetPage = link.getAttribute("data-target-page");
+if (targetPage && targetPage !== "external") {
+if (targetPage === currentPage) {
+link.classList.add("active-nav-link");
+} else {
+link.classList.remove("active-nav-link");
+}
+}
+});
+// Special handling for account link (it has a dropdown)
+const accountLinkNav = document.querySelector('.nav-link[data-target-page="account-center"]');
+if (accountLinkNav) {
+if (currentPage === 'account-center') {
+accountLinkNav.classList.add('active-nav-link');
+} else {
+accountLinkNav.classList.remove('active-nav-link');
+}
+}
+}
+
+// Hàm chung để render nội dung
+function renderPage(pageHtml, pageClassName, showLoader = true, loaderDuration = 1000) {
+if (showLoader) {
+showFullPageLoader(loaderDuration);
+}
+
+// 1. Gỡ bỏ lớp 'active' để kích hoạt hiệu ứng fade-out
+mainContentArea.classList.remove("active");
+// Gỡ bỏ tất cả các lớp liên quan đến bố cục trang cụ thể
+mainContentArea.classList.remove(
+"account-center-main-content",
+"products-main-content",
+"download-main-content",
+"home-main-content"
+);
+
+setTimeout(() => {
+mainContentArea.innerHTML = pageHtml;
+if (pageClassName) {
+mainContentArea.classList.add(pageClassName);
+}
+// 3. Force reflow để đảm bảo transition được kích hoạt
+void mainContentArea.offsetWidth;
+// 4. Thêm lớp 'active' để kích hoạt hiệu ứng fade-in
+mainContentArea.classList.add("active");
+
+// Áp dụng ngôn ngữ cho nội dung mới được render
+const currentLang = localStorage.getItem("currentLang") || "vi";
+mainContentArea.querySelectorAll("[data-vi][data-en]").forEach((el) => {
+const icons = el.querySelectorAll("i");
+if (icons.length > 0) {
+const textNode = Array.from(el.childNodes).find(
+(node) => node.nodeType === Node.TEXT_NODE && node.nodeValue.trim().length > 0
+);
+if (textNode) {
+textNode.nodeValue = ` ${el.getAttribute(`data-${currentLang}`)} `;
+}
+} else {
+el.textContent = el.getAttribute(`data-${currentLang}`);
+}
+});
+
+initializeSectionObserver(); // Khởi tạo lại observer cho nội dung mới
+if (showLoader) {
+hideFullPageLoader();
+}
+}, 500); // Khoảng thời gian này nên bằng hoặc lớn hơn transition-duration của `opacity` và `transform`
+updateActiveNavLink(); // Cập nhật active link sau khi render trang
+}
+
+// Hàm hiển thị trang chủ
+function renderHomePage(showLoader = true) {
+currentPage = "home";
+const homeHtml = `
+<section class="hero animated-section">
+<div class="hero-text">
+<span data-vi="Profile Otaku lỏ " data-en="Software Platform">Profile Otaku lỏ :))</span>
+<h2 data-vi="KrualX - Phan Gia Bảo" data-en="KrualX - Phan Gia Bảo">KrualX - Phan Gia Bảo</h2>
+<p
+data-vi="Trang Web này chỉ là profile của thằng otaku lỏ có tên Phan Gia Bảo."
+data-en="This website is just the profile of a little otaku named Phan Gia Bao."
+>
+Trang Web này chỉ là profile của thằng otaku lỏ có tên Phan Gia Bảo.
+</p>
+<div class="hero-buttons">
+<button class="btn-primary" data-vi="Web lỏ" data-en="Web lỏ">Web lỏ</button>
+<button class="btn-secondary" data-vi="Trẻ Trâu" data-en="Trẻ Trâu">Trẻ Trâu</button>
+</div>
+</div>
+<img
+src="https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExemg2cDVydG40ZHFlNjQ1YmhxNjAzNDVuOGV4cnY3MWR1ZW5mYXNqdSZlcD1oMV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/VDGOdvmp1bpc3PcCry/giphy.gif"
+alt="Phần mềm hiện đại"
+loading="lazy"
+/>
+</section>
+
+<section class="section">
+<h2 class="animated-section" data-vi="Thông Tin" data-en="Information">Thông Tin</h2>
+<p class="animated-section" data-vi="Tiểu sử của Otaku RÁCH" data-en="The biography of Otaku Loser">
+Tiểu sử của Otaku RÁCH
+</p>
+<div class="features">
+<div class="feature-box animated-section">
+<h3 data-vi="Tuổi" data-en="Age">Tuổi</h3>
+<p data-vi="17 tuổi còn trẻ trâu chán." data-en="17 years old, still a young bull, so bored.">
+17 tuổi còn trẻ trâu chán.
+</p>
+</div>
+<div class="feature-box animated-section">
+<h3 data-vi="Nơi Sống" data-en="Place of Living">Nơi Sống</h3>
+<p data-vi="Sống ở Quảng Nôm,tao người VIỆT NAM" data-en="Living in Quang Nam, I am Vietnamese.">
+Sống ở Quảng Nôm,tao người VIỆT NAM
+</p>
+</div>
+<div class="feature-box animated-section">
+<h3 data-vi="Sở thích" data-en="Hobby">Sở thích</h3>
+<p
+data-vi="Chơi game,chọc chó,đá banh,dev lỏ,"
+data-en="Play games, tease the dog, play soccer, be a fake(f*ck) dev,"
+>
+Chơi game,chọc chó,đá banh,dev lỏ,
+</p>
+</div>
+</div>
+</section>
+
+<section class="how-to-use-section">
+<h2 class="animated-section" data-vi="Thêm nữa nè" data-en="Moreover, here it is.">Thêm nữa nè</h2>
+<div class="how-to-use-content">
+<div class="how-to-use-steps">
+<div class="step-item animated-section">
+<div class="step-number">1</div>
+<div class="step-text">
+<h3 data-vi="Tên: Phan Gia Bảo" data-en="Name: Phan Gia Bao">Tên: Phan Gia Bảo</h3>
+<p data-vi="Tên quá đẹp xứng đáng có 100 em gái alime." data-en="The name is so beautiful, it deserves to have 100 anime girl.">
+Tên quá đẹp xứng đáng có 100 em gái alime.
+</p>
+</div>
+</div>
+<div class="step-item animated-section">
+<div class="step-number">2</div>
+<div class="step-text">
+<h3 data-vi="Sinh nhật: 14/07/2008" data-en="Birthday: 14/07/2008">Sinh nhật: 14/07/2008</h3>
+<p data-vi="Đến ngày,tháng,năm sinh cũng đẹp haha." data-en="The date of birth is also beautiful, haha.">
+Đến ngày,tháng,năm sinh cũng đẹp haha.
+</p>
+</div>
+</div>
+<div class="step-item animated-section">
+<div class="step-number">3</div>
+<div class="step-text">
+<h3 data-vi="Kỹ Năng" data-en="Skills">Kỹ Năng</h3>
+<p
+data-vi="Ăn chơi, chọc chó, chọc mèo, chơi Genshin, Wuthering Waves, trùm FIFA, FC, Valorant."
+data-en="Having fun, teasing dogs, teasing cats, playing Genshin, Wuthering Waves, FIFA, FC, Valorant master."
+>
+Ăn chơi, chọc chó, chọc mèo, chơi Genshin, Wuthering Waves, trùm FIFA, FC, Valorant.
+</p>
+</div>
+</div>
+<div class="step-item animated-section">
+<div class="step-number">4</div>
+<div class="step-text">
+<h3 data-vi="Ngôn Ngữ" data-en="Language">Ngôn Ngữ</h3>
+<p data-vi="Tiếng mẹ đẻ, tiếng Anh lỏ, tiếng Alime (Nhật)." data-en="Vietnamese, broken English, Anime language (Japanese).">
+Tiếng mẹ đẻ, tiếng Anh lỏ, tiếng Alime (Nhật).
+</p>
+</div>
+</div>
+<a
+href="https://www.facebook.com/Krual.me/?locale=vi_VN"
+target="_blank"
+class="btn-contact animated-section"
+data-vi="Liên hệ hỗ trợ"
+data-en="Contact Support"
+>
+<i class="fa-brands fa-facebook-messenger"></i> Liên hệ hỗ trợ
+</a>
+</div>
+<div class="how-to-use-image animated-section">
+<img
+src="https://media.giphy.com/media/xUNd9YbZxUobLqOKhW/giphy.gif?cid=ecf05e47l80fxe4g15rfj9svupmw7sebj1omycq0ba4ul3m0&ep=v1_gifs_related&rid=giphy.gif&ct=g"
+alt="KrualX"
+loading="lazy"
+/>
+<div class="social-links">
+<a href="https://discord.gg/xy4Gbsmt" target="_blank" aria-label="Discord"
+><i class="fa-brands fa-discord"></i
+></a>
+<a href="https://www.facebook.com/Krual.me/?locale=vi_VN" target="_blank" aria-label="Facebook"
+><i class="fa-brands fa-facebook"></i
+></a>
+<a href="https://www.tiktok.com/@krualx2008" target="_blank" aria-label="TikTok"
+><i class="fa-brands fa-tiktok"></i
+></a>
+<a href="https://github.com/KrualX" target="_blank" aria-label="GitHub"
+><i class="fa-brands fa-github"></i
+></a>
+<a href="https://www.youtube.com/@KrualX" target="_blank" aria-label="YouTube"
+><i class="fa-brands fa-youtube"></i
+></a>
+</div>
+</div>
+</div>
+</section>
+`;
+renderPage(homeHtml, "home-main-content", showLoader, 1000);
+// Có thể thêm event listener cho các nút "Web lỏ", "Trẻ Trâu" nếu cần
+setTimeout(() => {
+mainContentArea.querySelectorAll(".hero-buttons button").forEach((button) => {
+button.addEventListener("click", (e) => {
+e.preventDefault();
+showToast(
+btnVi.classList.contains("active")
+? "Chức năng này đang được phát triển."
+: "This feature is under development.",
+"info"
+);
+});
+});
+}, 550); // Chờ nội dung được render
+}
+
+// Hàm hiển thị trang trung tâm tài khoản
+function renderAccountCenterPage(showLoader = true) {
+currentPage = "account-center";
+let contentHtml = "";
+const currentLang = btnVi.classList.contains("active") ? "vi" : "en";
+if (currentUser) {
+const userData = users[currentUser];
+const registrationDate =
+userData && userData.registrationDate
+? new Date(userData.registrationDate).toLocaleDateString(
+currentLang === "vi" ? "vi-VN" : "en-US"
+)
+: (currentLang === "vi" ? "Không có" : "N/A");
+
+contentHtml = `
+<div class="account-center-container animated-section">
+<div class="account-center-header">
+<h2 data-vi="Trung tâm tài khoản" data-en="Account Center">Trung tâm tài khoản</h2>
+<p
+data-vi="Chào mừng, ${currentUser}! Quản lý thông tin và cài đặt của bạn."
+data-en="Welcome, ${currentUser}! Manage your information and settings."
+>
+Chào mừng, ${currentUser}! Quản lý thông tin và cài đặt của bạn.
+</p>
+</div>
+<div class="account-center-body">
+<div class="account-center-sidebar">
+<ul>
+<li>
+<button
+id="tab-personal-info"
+class="active-tab"
+data-tab="personal-info"
+data-vi="Thông tin cá nhân"
+data-en="Personal Info"
+>
+<i class="fa-solid fa-address-card"></i> Thông tin cá nhân
+</button>
+</li>
+<li>
+<button
+id="tab-change-password"
+data-tab="change-password"
+data-vi="Đổi mật khẩu"
+data-en="Change Password"
+>
+<i class="fa-solid fa-key"></i> Đổi mật khẩu
+</button>
+</li>
+<li>
+<button
+id="tab-transaction-history"
+data-tab="transaction-history"
+data-vi="Lịch sử giao dịch"
+data-en="Transaction History"
+>
+<i class="fa-solid fa-clock-rotate-left"></i> Lịch sử giao dịch
+</button>
+</li>
+<li>
+<button id="tab-logout" data-tab="logout" data-vi="Đăng xuất" data-en="Logout">
+<i class="fa-solid fa-right-from-bracket"></i> Đăng xuất
+</button>
+</li>
+</ul>
+</div>
+<div class="account-center-content">
+<div id="personal-info-content" class="tab-content-item active-tab-content">
+<h3 data-vi="Thông tin cá nhân của bạn" data-en="Your Personal Information">
+Thông tin cá nhân của bạn
+</h3>
+<div class="info-grid">
+  <div class="info-item">
+    <label data-vi="Tên đăng nhập:" data-en="Username:">Tên đăng nhập:</label>
+    <p id="display-username">${currentUser}</p>
+  </div>
+  <div class="info-item">
+    <label data-vi="Email:" data-en="Email:">Email:</label>
+    <p id="display-email">${userData.email || (currentLang === "vi" ? "Chưa cung cấp" : "Not provided")}</p>
+  </div>
+  <div class="info-item">
+    <label data-vi="Ngày đăng ký:" data-en="Registration Date:">Ngày đăng ký:</label>
+    <p id="display-registration-date">${registrationDate}</p>
+  </div>
+  <div class="info-item">
+    <label data-vi="Giới tính:" data-en="Gender:">Giới tính:</label>
+    <select id="gender-select" name="gender">
+      <option value="undefined" data-vi="Chưa xác định" data-en="Undefined">Chưa xác định</option>
+      <option value="male" data-vi="Nam" data-en="Male">Nam</option>
+      <option value="female" data-vi="Nữ" data-en="Female">Nữ</option>
+      <option value="other" data-vi="Khác" data-en="Other">Other</option>
+    </select>
+  </div>
+  <div class="info-item">
+    <label data-vi="Số điện thoại:" data-en="Phone Number:">Số điện thoại:</label>
+    <p id="display-phone">${userData.phone || (currentLang === "vi" ? "Chưa cung cấp" : "Not provided")}</p>
+  </div>
+</div>
+</div>
+
+<div id="change-password-content" class="tab-content-item">
+<h3 data-vi="Đổi mật khẩu" data-en="Change Password">Đổi mật khẩu</h3>
+<form id="change-password-form" novalidate>
+<label for="old-password" data-vi="Mật khẩu cũ:" data-en="Old Password:"
+>Mật khẩu cũ:</label
+>
+<input type="password" id="old-password" name="oldPassword" required />
+<div class="error-message" id="old-password-error"></div>
+
+<label for="new-password" data-vi="Mật khẩu mới:" data-en="New Password:"
+>Mật khẩu mới:</label
+>
+<input type="password" id="new-password" name="newPassword" required />
+<div class="error-message" id="new-password-error"></div>
+
+<label for="confirm-new-password" data-vi="Xác nhận mật khẩu mới:" data-en="Confirm New Password:"
+>Xác nhận mật khẩu mới:</label
+>
+<input type="password" id="confirm-new-password" name="confirmNewPassword" required />
+<div class="error-message" id="confirm-new-password-error"></div>
+
+<button type="submit" data-vi="Cập nhật mật khẩu" data-en="Update Password">
+Cập nhật mật khẩu
+</button>
+</form>
+</div>
+
+<div id="transaction-history-content" class="tab-content-item">
+<h3 data-vi="Lịch sử giao dịch" data-en="Transaction History">Lịch sử giao dịch</h3>
+<div class="transaction-history">
+<ul id="transaction-list"></ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+`;
+} else {
+contentHtml = `
+<div class="message-no-login animated-section">
+<h2 data-vi="Bạn chưa đăng nhập." data-en="You are not logged in.">Bạn chưa đăng nhập.</h2>
+<p data-vi="Vui lòng " data-en="Please ">
+Vui lòng
+<a href="#" id="go-to-login" data-vi="đăng nhập" data-en="log in">đăng nhập</a> để truy cập Trung tâm tài khoản.
+</p>
+</div>
+`;
+}
+renderPage(contentHtml, "account-center-main-content", showLoader, 1500);
+
+// Sau khi render xong HTML, gán lại các sự kiện (rất quan trọng)
+if (currentUser) {
+setTimeout(() => {
+// Đảm bảo các phần tử đã có trong DOM
+attachAccountCenterEvents();
+}, 550); // Khoảng thời gian đủ để transition hoàn tất
+} else {
+setTimeout(() => {
+const goToLoginLink = document.getElementById("go-to-login");
+if (goToLoginLink) {
+goToLoginLink.addEventListener("click", (e) => {
+e.preventDefault();
+authModal.classList.add("active");
+authModal.setAttribute("aria-hidden", "false");
+showForm("login");
+});
+}
+}, 550);
+}
+}
+
+// Hàm mới để gắn các sự kiện của Account Center (giúp code sạch hơn)
+function attachAccountCenterEvents() {
+const currentLang = btnVi.classList.contains("active") ? "vi" : "en";
+const tabButtons = mainContentArea.querySelectorAll(".account-center-sidebar button");
+const tabContents = mainContentArea.querySelectorAll(".tab-content-item");
+
+function showAccountTab(tabId) {
+tabButtons.forEach((btn) => btn.classList.remove("active-tab"));
+tabContents.forEach((content) => content.classList.remove("active-tab-content"));
+
+const activeTabButton = mainContentArea.querySelector(`button[data-tab="${tabId}"]`);
+const activeTabContent = document.getElementById(`${tabId}-content`);
+
+if (activeTabButton) activeTabButton.classList.add("active-tab");
+if (activeTabContent) activeTabContent.classList.add("active-tab-content");
+}
+
+tabButtons.forEach((button) => {
+button.addEventListener("click", (e) => {
+const tab = e.currentTarget.getAttribute("data-tab");
+if (tab === "logout") {
+if (
+confirm(
+currentLang === "vi" ? "Bạn có muốn đăng xuất không?" : "Do you want to log out?"
+)
+) {
+clearCurrentUser();
+showToast(
+currentLang === "vi" ? "Bạn đã đăng xuất thành công." : "You have been logged out successfully.",
+"info"
+);
+renderHomePage(false);
+}
+} else {
+showAccountTab(tab);
+}
+});
+});
+
+// Render transaction history (làm lại để đảm bảo cập nhật)
+const transactionList = document.getElementById("transaction-list");
+const currentUserData = users[currentUser];
+if (transactionList && currentUserData) {
+const transactions = currentUserData.transactions || [];
+if (transactions.length > 0) {
+transactions.sort((a, b) => new Date(b.date) - new Date(a.date));
+transactionList.innerHTML = transactions
+.map(
+(txn) => `
+<li>
+<div class="transaction-details">
+<strong>${txn.type} (${txn.id})</strong>
+<span>${new Date(txn.date).toLocaleDateString(
+currentLang === "vi" ? "vi-VN" : "en-US"
+)}</span>
+</div>
+<span class="transaction-amount ${txn.amount < 0 ? "negative" : ""}">${txn.amount.toLocaleString(
+currentLang === "vi" ? "vi-VN" : "en-US"
+)} VNĐ</span>
+</li>
+`
+)
+.join("");
+} else {
+transactionList.innerHTML = `<div class="no-transactions" data-vi="Không có giao dịch nào." data-en="No transactions found.">Không có giao dịch nào.</div>`;
+}
+}
+
+// Cập nhật thông tin cá nhân và xử lý thay đổi giới tính
+if (currentUserData) {
+    document.getElementById('display-username').textContent = currentUser;
+    document.getElementById('display-email').textContent = currentUserData.email || (currentLang === "vi" ? "Chưa cung cấp" : "Not provided");
+    document.getElementById('display-registration-date').textContent = new Date(currentUserData.registrationDate).toLocaleDateString(currentLang === "vi" ? "vi-VN" : "en-US");
+    document.getElementById('display-phone').textContent = currentUserData.phone || (currentLang === "vi" ? "Chưa cung cấp" : "Not provided");
+
+    const genderSelect = document.getElementById('gender-select');
+    if (genderSelect) {
+        // Đặt giá trị mặc định cho select
+        genderSelect.value = currentUserData.gender || 'undefined';
+
+        // Cập nhật text cho các option dựa trên ngôn ngữ hiện tại
+        genderSelect.querySelectorAll('option').forEach(option => {
+            option.textContent = option.getAttribute(`data-${currentLang}`);
+        });
+
+        // Lắng nghe sự kiện thay đổi
+        genderSelect.addEventListener('change', () => {
+            const newGender = genderSelect.value;
+            users[currentUser].gender = newGender;
+            saveUsers();
+            showToast(currentLang === "vi" ? "Giới tính đã được cập nhật." : "Gender has been updated.", "success");
+        });
+    }
+}
+
+
+// Change Password Form Logic (làm lại để đảm bảo gắn sự kiện mới)
+const changePasswordForm = document.getElementById("change-password-form");
+if (changePasswordForm) {
+changePasswordForm.addEventListener("submit", async (e) => {
+e.preventDefault();
+clearAllErrors();
+
+const oldPassword = changePasswordForm.querySelector("#old-password").value;
+const newPassword = changePasswordForm.querySelector("#new-password").value;
+const confirmNewPassword = changePasswordForm.querySelector(
+"#confirm-new-password"
+).value;
+
+let isValid = true;
+const userData = users[currentUser];
+
+if (!oldPassword) {
+showError(
+document.getElementById("old-password-error"),
+currentLang === "vi" ? "Vui lòng nhập mật khẩu cũ." : "Please enter your old password.",
+document.getElementById("old-password")
+);
+isValid = false;
+} else if (oldPassword !== userData.password) {
+showError(
+document.getElementById("old-password-error"),
+currentLang === "vi" ? "Mật khẩu cũ không đúng." : "Old password is incorrect.",
+document.getElementById("old-password")
+);
+isValid = false;
+}
+
+if (!newPassword) {
+showError(
+document.getElementById("new-password-error"),
+currentLang === "vi" ? "Vui lòng nhập mật khẩu mới." : "Please enter a new password.",
+document.getElementById("new-password")
+);
+isValid = false;
+} else if (newPassword.length < 6) {
+showError(
+document.getElementById("new-password-error"),
+currentLang === "vi" ? "Mật khẩu mới phải có ít nhất 6 ký tự." : "New password must be at least 6 characters.",
+document.getElementById("new-password")
+);
+isValid = false;
+} else if (newPassword === oldPassword) {
+showError(
+document.getElementById("new-password-error"),
+currentLang === "vi" ? "Mật khẩu mới không được giống mật khẩu cũ." : "New password cannot be the same as old password.",
+document.getElementById("new-password")
+);
+isValid = false;
+}
+
+if (!confirmNewPassword) {
+showError(
+document.getElementById("confirm-new-password-error"),
+currentLang === "vi" ? "Vui lòng xác nhận mật khẩu mới." : "Please confirm your new password.",
+document.getElementById("confirm-new-password")
+);
+isValid = false;
+} else if (newPassword !== confirmNewPassword) {
+showError(
+document.getElementById("confirm-new-password-error"),
+currentLang === "vi" ? "Mật khẩu xác nhận không khớp." : "Confirm new password does not match.",
+document.getElementById("confirm-new-password")
+);
+isValid = false;
+}
+
+if (!isValid) return;
+
+const submitBtn = changePasswordForm.querySelector('button[type="submit"]');
+setFormProcessing(true, changePasswordForm, submitBtn);
+
+await new Promise((resolve) => setTimeout(resolve, 1500));
+
+users[currentUser].password = newPassword;
+saveUsers();
+showToast(
+currentLang === "vi" ? "Mật khẩu của bạn đã được thay đổi thành công!" : "Your password has been changed successfully!",
+"success"
+);
+changePasswordForm.reset();
+setFormProcessing(false, changePasswordForm, submitBtn);
+});
+}
+
+showAccountTab("personal-info"); // Mặc định hiển thị tab thông tin cá nhân
+}
+
+// Hàm hiển thị trang Products
+function renderProductsPage(showLoader = true) {
+currentPage = "products";
+const productsHtml = `
+<section class="section products-page-content animated-section">
+<h2 data-vi="Sản phẩm của chúng tôi" data-en="Our Products">Sản phẩm của chúng tôi</h2>
+<p
+data-vi="Khám phá các phần mềm và dịch vụ mạnh mẽ mà chúng tôi cung cấp."
+data-en="Explore the powerful software and services we offer."
+>
+Khám phá các phần mềm và dịch vụ mạnh mẽ mà chúng tôi cung cấp.
+</p>
+<div class="products-grid">
+<div class="product-item">
+<h3 data-vi="KrualX Pro" data-en="KrualX Pro">KrualX Pro</h3>
+<p data-vi="Phiên bản cao cấp với đầy đủ tính năng mạnh mẽ." data-en="Premium version with full powerful features.">
+Phiên bản cao cấp với đầy đủ tính năng mạnh mẽ.
+</p>
+<span class="price">499.000 VNĐ</span>
+<button class="btn-primary" data-vi="Mua ngay" data-en="Buy Now">Mua ngay</button>
+</div>
+<div class="product-item">
+<h3 data-vi="KrualX Basic" data-en="KrualX Basic">KrualX Basic</h3>
+<p data-vi="Phù hợp cho người mới bắt đầu, các tính năng cơ bản." data-en="Suitable for beginners, basic features.">
+Phù hợp cho người mới bắt đầu, các tính năng cơ bản.
+</p>
+<span class="price" data-vi="Miễn phí" data-en="Free">Miễn phí</span>
+<button class="btn-secondary" data-vi="Tải miễn phí" data-en="Free Download">
+Tải miễn phí
+</button>
+</div>
+<div class="product-item">
+<h3 data-vi="KrualX API" data-en="KrualX API">KrualX API</h3>
+<p data-vi="Tích hợp dễ dàng vào ứng dụng của bạn." data-en="Easily integrate into your application.">
+Tích hợp dễ dàng vào ứng dụng của bạn.
+</p>
+<span class="price" data-vi="Liên hệ" data-en="Contact Us">Liên hệ</span>
+<button class="btn-primary" data-vi="Tìm hiểu thêm" data-en="Learn More">
+Tìm hiểu thêm
+</button>
+</div>
+</div>
+</section>
+`;
+renderPage(productsHtml, "products-main-content", showLoader, 1000);
+// Có thể thêm event listener cho các nút "Mua ngay", "Tải miễn phí" nếu cần
+setTimeout(() => {
+mainContentArea.querySelectorAll(".products-grid .btn-primary, .products-grid .btn-secondary").forEach((button) => {
+button.addEventListener("click", (e) => {
+e.preventDefault();
+showToast(
+btnVi.classList.contains("active")
+? "Chức năng này đang được phát triển."
+: "This feature is under development.",
+"info"
+);
+});
+});
+}, 550); // Chờ nội dung được render
+}
+
+// Hàm hiển thị trang Download
+function renderDownloadPage(showLoader = true) {
+currentPage = "download";
+const downloadHtml = `
+<section class="section download-page-content animated-section">
+<h2 data-vi="Tải xuống phần mềm" data-en="Download Software">Tải xuống phần mềm</h2>
+<p
+data-vi="Chọn phiên bản phù hợp với hệ điều hành của bạn."
+data-en="Choose the version compatible with your operating system."
+>
+Chọn phiên bản phù hợp với hệ điều hành của bạn.
+</p>
+<div class="download-options">
+<div class="download-item">
+<i class="fa-brands fa-github"></i> <h3 data-vi="Mã nguồn Web" data-en="Web Source Code">Mã nguồn Web</h3> <p data-vi="Tải xuống toàn bộ mã nguồn của trang web này." data-en="Download the complete source code of this website.">Tải xuống toàn bộ mã nguồn của trang web này.</p> <a href="https://github.com/KrualX/KrualX.github.io" target="_blank" class="btn-primary" data-vi="Tải xuống (GitHub)" data-en="Download (GitHub)">Tải xuống (GitHub)</a> </div>
+<div class="download-item">
+<i class="fa-brands fa-apple"></i>
+<h3 data-vi="KrualX cho macOS" data-en="KrualX for macOS">KrualX cho macOS</h3>
+<p data-vi="Yêu cầu macOS 10.15 trở lên." data-en="Requires macOS 10.15 or later.">Yêu cầu macOS 10.15 trở lên.</p>
+<a href="#" class="btn-primary" data-vi="Tải xuống (.dmg)" data-en="Download (.dmg)">Tải xuống (.dmg)</a>
+</div>
+<div class="download-item">
+<i class="fa-brands fa-linux"></i>
+<h3 data-vi="KrualX cho Linux" data-en="KrualX for Linux">KrualX cho Linux</h3>
+<p data-vi="Phiên bản AppImage hoặc .deb." data-en="AppImage or .deb version.">Phiên bản AppImage hoặc .deb.</p>
+<a href="#" class="btn-primary" data-vi="Tải xuống (AppImage)" data-en="Download (AppImage)">Tải xuống (AppImage)</a>
+</div>
+</div>
+<p
+class="note"
+data-vi="Lưu ý: Đây là các liên kết demo, không có tệp thực sự được tải xuống."
+data-en="Note: These are demo links, no actual files will be downloaded."
+>
+Lưu ý: Các liên kết tải xuống macOS và Linux là demo. Liên kết GitHub sẽ dẫn đến mã nguồn của trang web.
+</p> </section>
+`;
+renderPage(downloadHtml, "download-main-content", showLoader, 1000);
+// Có thể thêm event listener cho các nút "Tải xuống" để hiển thị toast
+setTimeout(() => {
+mainContentArea.querySelectorAll(".download-options .btn-primary").forEach((button) => {
+// Chỉ hiển thị toast cho các link demo, không phải link GitHub
+if (button.getAttribute('href') === '#') {
+button.addEventListener("click", (e) => {
+e.preventDefault();
+showToast(
+btnVi.classList.contains("active")
+? "Chức năng tải xuống đang được phát triển."
+: "Download function is under development.",
+"info"
+);
+});
+}
+});
+}, 550); // Chờ nội dung được render
+}
+
+// Xử lý các liên kết điều hướng (HOME, PRODUCTS, DOWNLOAD, ACCOUNT CENTER)
+document.querySelectorAll(".nav-link").forEach((link) => {
+// Loại trừ các liên kết external (Facebook Messenger) để không bị JavaScript xử lý
+if (link.getAttribute("data-target-page") === "external") {
+return;
+}
+
+link.addEventListener("click", (e) => {
+e.preventDefault(); // Ngăn chặn hành vi mặc định của liên kết
+
+const targetPage = link.getAttribute("data-target-page");
+
+if (targetPage === "home") {
+renderHomePage(false); // Không hiển thị loader
+} else if (targetPage === "account-center") {
+if (!currentUser) {
+authModal.classList.add("active"); // Mở modal đăng nhập
+authModal.setAttribute("aria-hidden", "false");
+showForm("login");
+showToast(
+btnVi.classList.contains("active")
+? "Vui lòng đăng nhập để truy cập Trung tâm tài khoản."
+: "Please log in to access the Account Center.",
+"error"
+);
+} else {
+renderAccountCenterPage(false); // Không hiển thị loader
+}
+} else if (targetPage === "products") {
+// Xử lý trang Products
+if (!currentUser) {
+authModal.classList.add("active"); // Mở modal đăng nhập
+authModal.setAttribute("aria-hidden", "false");
+showForm("login");
+showToast(
+btnVi.classList.contains("active")
+? "Vui lòng đăng nhập để xem sản phẩm."
+: "Please log in to view products.",
+"error"
+);
+} else {
+renderProductsPage(false); // Gọi hàm render trang Products
+}
+} else if (targetPage === "download") {
+// Xử lý trang Download
+if (!currentUser) {
+authModal.classList.add("active"); // Mở modal đăng nhập
+authModal.setAttribute("aria-hidden", "false");
+showForm("login");
+showToast(
+btnVi.classList.contains("active")
+? "Vui lòng đăng nhập để tải xuống."
+: "Please log in to download.",
+"error"
+);
+} else {
+renderDownloadPage(false); // Gọi hàm render trang Download
+}
+}
+// Cho link account, logic đã được xử lý trong updateHeaderForAuth() và accountLink.addEventListener
+});
+});
+
+// --- JavaScript cho hiệu ứng cuộn header (CHỈ DÀNH CHO MOBILE) ---
+const mainHeader = document.getElementById("main-header");
+let lastScrollY = window.scrollY;
+const mobileBreakpoint = 768; // Kích thước màn hình tối đa để áp dụng hiệu ứng header
+const scrollThreshold = 50; // Ngưỡng cuộn để kích hoạt (ví dụ: 50px)
+
+function handleScroll() {
+const currentScrollY = window.scrollY;
+
+if (window.innerWidth <= mobileBreakpoint) {
+// Chỉ áp dụng hiệu ứng trên giao diện di động
+if (currentScrollY > lastScrollY && currentScrollY > scrollThreshold) {
+// Cuộn xuống VÀ đã vượt qua ngưỡng: ẩn header
+mainHeader.classList.add("scrolled");
+} else if (currentScrollY <= scrollThreshold) {
+// Cuộn lên HOẶC đã về gần đầu trang (<= ngưỡng): hiện header
+mainHeader.classList.remove("scrolled");
+}
+// Nếu cuộn lên nhưng chưa đủ về đầu trang, header vẫn giữ trạng thái 'scrolled'
+} else {
+// Trên giao diện PC (lớn hơn mobileBreakpoint), đảm bảo header luôn hiển thị đầy đủ
+mainHeader.classList.remove("scrolled");
+}
+lastScrollY = currentScrollY;
+}
+
+// Thêm sự kiện lắng nghe cuộn
+window.addEventListener("scroll", handleScroll);
+// Chạy hàm một lần khi tải trang để xử lý trường hợp refresh ở giữa trang
+window.addEventListener("load", handleScroll);
+// Chạy hàm khi thay đổi kích thước cửa sổ (để bật/tắt hiệu ứng cho mobile/pc)
+window.addEventListener("resize", handleScroll);
+
+// --- JavaScript cho hiệu ứng cuộn các section ---
+// LƯU Ý: animatedSections sẽ được gọi lại sau khi render trang mới
+const animatedSections = document.querySelectorAll(".animated-section"); // Ban đầu chỉ định nghĩa thôi
+
+const observerOptions = {
+root: null, // so với khung nhìn
+rootMargin: "0px",
+threshold: 0.15, // Kích hoạt khi 15% phần tử hiển thị
+};
+
+let sectionObserver; // Khai báo biến observer ở scope này
+
+function initializeSectionObserver() {
+if (sectionObserver) {
+sectionObserver.disconnect(); // Ngắt kết nối observer cũ nếu có
+}
+sectionObserver = new IntersectionObserver((entries, observer) => {
+entries.forEach((entry) => {
+if (entry.isIntersecting) {
+entry.target.classList.add("is-visible");
+} else {
+entry.target.classList.remove("is-visible");
+}
+});
+}, observerOptions);
+
+document.querySelectorAll(".animated-section").forEach((section) => {
+sectionObserver.observe(section);
+});
+}
+
+// Khởi tạo trang và hiệu ứng
+initializeSectionObserver(); // Initialize observer for initial content
+
+// Khởi tạo ngôn ngữ và trạng thái đăng nhập khi tải trang
+const initialLang = localStorage.getItem("currentLang") || "vi";
+setLanguage(initialLang); // This will call updateHeaderForAuth() and re-render current page
+
+// Optional: Save current page in localStorage (e.g., when refreshing or coming back)
+window.addEventListener("beforeunload", () => {
+localStorage.setItem("lastPage", currentPage);
+});
+
+// Render home page by default when loaded (or account center page if logged in and was on it)
+// CHỈ HIỂN THỊ LOADER KHI TẢI TRANG LẦN ĐẦU (reload trình duyệt)
+window.addEventListener("load", () => {
+if (localStorage.getItem("lastPage") === "account-center" && currentUser) {
+renderAccountCenterPage(true); // Hiển thị loader nếu trang trước là Account Center
+} else if (localStorage.getItem("lastPage") === "products" && currentUser) {
+renderProductsPage(true); // Hiển thị loader nếu trang trước là Products
+} else if (localStorage.getItem("lastPage") === "download" && currentUser) {
+renderDownloadPage(true); // Hiển thị loader nếu trang trước là Download
+} else {
+renderHomePage(true); // Luôn hiển thị loader khi tải trang chủ lần đầu
+}
+});
+</script>
+
+<script>
+// Tuyết rơi đơn giản
+const canvas = document.getElementById("snow-canvas");
+const ctx = canvas.getContext("2d");
+let width = window.innerWidth;
+let height = Math.max(
+  document.body.scrollHeight,
+  document.documentElement.scrollHeight,
+  document.body.offsetHeight,
+  document.documentElement.offsetHeight,
+  document.body.clientHeight,
+  document.documentElement.clientHeight
+);
+
+canvas.width = width;
+canvas.height = height;
+
+let numFlakes = 100;
+let flakes = [];
+
+function createSnowFlakes() {
+  for (let i = 0; i < numFlakes; i++) {
+    flakes.push({
+      x: Math.random() * width,
+      y: Math.random() * height,
+      r: Math.random() * 4 + 1,
+      d: Math.random() + 1,
+    });
+  }
+}
+
+function drawFlakes() {
+  ctx.clearRect(0, 0, width, height);
+  ctx.fillStyle = "white";
+  ctx.beginPath();
+  for (let i = 0; i < numFlakes; i++) {
+    let f = flakes[i];
+    ctx.moveTo(f.x, f.y);
+    ctx.arc(f.x, f.y, f.r, 0, Math.PI * 2, true);
+  }
+  ctx.fill();
+  moveFlakes();
+}
+
+let angle = 0;
+
+function moveFlakes() {
+  angle += 0.01;
+  for (let i = 0; i < numFlakes; i++) {
+    let f = flakes[i];
+    f.y += Math.pow(f.d, 2) + 1;
+    f.x += Math.sin(angle) * 2;
+
+    if (f.y > height) {
+      f.y = 0;
+      f.x = Math.random() * width;
+    }
+  }
+}
+
+function updateCanvas() {
+  drawFlakes();
+  requestAnimationFrame(updateCanvas);
+}
+
+window.addEventListener("resize", () => {
+  width = window.innerWidth;
+  height = Math.max(
+    document.body.scrollHeight,
+    document.documentElement.scrollHeight,
+    document.body.offsetHeight,
+    document.documentElement.offsetHeight,
+    document.body.clientHeight,
+    document.documentElement.clientHeight
+  );
+  canvas.width = width;
+  canvas.height = height;
+});
+createSnowFlakes();
+updateCanvas();
+</script>
+</body>
+</html>
